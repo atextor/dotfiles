@@ -8,7 +8,6 @@ set bell-style none
 set meta-flag On
 #set input-meta On
 set convert-meta Off
-set convert-meta on
 set output-meta On
 
 # Set various nice escape sequences:
