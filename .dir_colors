@@ -1,0 +1,306 @@
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR tty
+
+# Extra command line options for ls go here.
+# Basically these ones are:
+#  -F = show '/' for dirs, '*' for executables, etc.
+#  -T 0 = don't trust tab spacing when formatting ls output.
+#  -b = better support for special characters
+OPTIONS -F -b -T 0
+
+TERM Eterm
+TERM ansi
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM putty
+TERM rxvt
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
+TERM screen-w
+TERM screen.linux
+TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes: 
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+
+NORMAL 00        # global default, although everything should be something.
+FILE   00        # normal file
+RESET  0         # reset to "normal" color
+DIR    01;34     # directory
+LINK   01;36     # symbolic link (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
+#MULTIHARDLINK 00 # regular file with more than one link
+FIFO   40;33     # pipe
+SOCK   01;35     # socket
+DOOR   01;35     # door
+BLK    40;33;01  # block device driver
+CHR    40;33;01  # character device driver
+ORPHAN 40;31;01  # symlink to nonexistent file, or non-stat'able file
+SETUID 37;41     # file that is setuid (u+s)
+SETGID 30;43     # file that is setgid (g+s)
+CAPABILITY 30;41 # file with capability
+STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
+STICKY 37;44     # dir with the sticky bit set (+t) and not other-writable
+
+# This is for files with execute permission:
+EXEC   01;32 
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+ 
+# executables (bright green)
+.bat  01;32
+.BAT  01;32
+.btm  01;32
+.BTM  01;32
+.cmd  01;32
+.CMD  01;32
+.com  01;32
+.COM  01;32
+.dll  01;32
+.DLL  01;32
+.exe  01;32
+.EXE  01;32
+.x86  01;32
+
+# archives or compressed (bright red)
+.arj  01;31
+.bz2  01;31
+.deb  01;31
+.dz   01;31
+.gz   01;31
+.lzh  01;31
+.lz   01;31
+.xz   01;31
+.lzma 01;31
+.rpm  01;31
+.tar  01;31
+.taz  01;31
+.tb2  01;31
+.tbz2 01;31
+.tbz  01;31
+.tgz  01;31
+.tlz  01;31
+.txz  01;31
+.tz   01;31
+.tz2  01;31
+.z    01;31
+.Z    01;31
+.zip  01;31
+.ZIP  01;31
+.zoo  01;31
+.rar  01;31
+.ace  01;31
+.RAR  01;31
+.ACE  01;31
+.wsz  01;31
+.WSZ  01;31
+.jar  01;31
+.zoo  01;31
+.cpio 01;31
+.7z   01;31
+.rz   01;31
+
+# multimedia (video/image/sound) file formats (purple)
+.aac  01;35
+.anx  01;35
+.asf  01;35
+.ASF  01;35
+.au   00;35
+.avi  01;35
+.AVI  01;35
+.axa  01;35
+.axv  01;35
+.bmp  01;35
+.BMP  01;35
+.cgm  01;35
+.dl   01;35
+.emf  01;35
+.flac 01;35
+.FLAC 01;35
+.flc  01;35
+.fli  01;35
+.flv  01;35
+.gif  01;35
+.GIF  01;35
+.gl   01;35
+.it   01;35
+.jpeg 01;35
+.JPEG 01;35
+.jpg  01;35
+.JPG  01;35
+.m2a  01;35
+.M2a  01;35
+.m2v  01;35
+.M2V  01;35
+.m3u  01;35
+.M3U  01;35
+.m4v  01;35
+.mid  01;35
+.midi 01;35
+.mka  01;35
+.mkv  01;35
+.MKV  01;35
+.mng  01;35
+.mod  01;35
+.MOD  01;35
+.mov  01;35
+.MOV  01;35
+.mp3  01;35
+.MP3  01;35
+.mp4  01;35
+.MP4  01;35
+.mp4v 01;35
+.mpc  01;35
+.mpeg 01;35
+.MPEG 01;35
+.mpg  01;35
+.MPG  01;35
+.nuv  01;35
+.oga  01;35
+.ogg  01;35
+.OGG  01;35
+.ogm  01;35
+.ogv  01;35
+.ogx  01;35
+.pbm  01;35
+.pcx  01;35
+.PCX  01;35
+.pgm  01;35
+.png  01;35
+.PNG  01;35
+.ppm  01;35
+.qt   01;35
+.ra   01;35
+.rm   01;35
+.RM   01;35
+.rmvb 01;35
+.s3m  01;35
+.spx  01;35
+.svg  01;35
+.SVG  01;35
+.svgz 01;35
+.swf  01;35
+.SWF  01;35
+.tga  01;35
+.TGA  01;35
+.tif  01;35
+.TIF  01;35
+.tiff 01;35
+.vob  01;35
+.wav  01;35
+.WAV  01;35
+.wmv  01;35
+.WMV  01;35
+.xbm  01;35
+.xcf  01;35
+.XCF  01;35
+.xpm  01;35
+.xspf 01;35
+.xwd  01;35
+.yuv  01;35
+
+# documents (text files/writing) (yellow)
+.txt   00;33
+.TXT   00;33
+.txt~  00;33
+.TXT~  00;33
+.sdw   00;33
+.sxw   00;33
+.doc   00;33
+.DOC   00;33
+.abw   00;33
+.pdf   00;33
+.PDF   00;33
+.ps    00;33
+.PS    00;33
+.cfg   00;33
+.cfg~  00;33
+.conf  00;33
+.conf~ 00;33
+.log   00;33
+.ppt   00;33
+.PPT   00;33
+
+# script and source code (white)
+.a     01;37
+.am    01;37
+.c     01;37
+.cc    01;37
+.cpp   01;37
+.css   01;37
+.dat   01;37
+.h     01;37
+.hh    01;37
+.htm   01;37
+.html  01;37
+.HTM   01;37
+.HTML  01;37
+.in    01;37
+.ini   01;37
+.jar   01;37
+.java  01;37
+.js    01;37
+.la    01;37
+.lo    01;37
+.m4    01;37
+.moc   01;37
+.php   01;37
+.php3  01;37
+.php4  01;37
+.s     01;37
+.S     01;37
+.spec  01;37
+.xml   01;37
+.sh    01;37
+.pl    01;37
+.perl  01;37
+.rb    01;37
+.scala 01;37
+

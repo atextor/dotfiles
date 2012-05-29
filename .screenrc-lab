@@ -1,0 +1,32 @@
+autodetach on
+startup_message off
+defscrollback 1024
+deflogin on
+defflow off          # will force screen to process ^S/^Q
+deflog off
+logfile "$HOME/.screen/screenlog.%n"
+hardcopy_append on
+crlf off             # this affects the copying of text regions with the `C-a [' command
+vbell off
+shelltitle "sh"
+sorendition Gk       # highlighting format for text marking and printing messages
+nethack on
+
+#termcapinfo rxvt ti@:te@
+hardstatus alwayslastline "  %{= kw}%?%-Lw%?%{= bw}%n*%f %t%?(%u)%?%{= kw}%?%+Lw%? %=%{wk} %d.%m.%Y %{yk} %0c "
+
+term screen-256color
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+screen 0
+screen 1
+screen 2
+screen 3
+screen 4
+screen 5
+screen 6
+screen 7
+screen 8
+
+select 0
+

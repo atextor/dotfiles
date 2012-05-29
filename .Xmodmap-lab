@@ -1,0 +1,79 @@
+! Custom key map
+! --------------
+! Keyboard layout that is mainly geared towards command line
+! and programming use, but is still very usable when writing
+! German text (which includes ä, ö, ü and ß, and occasionally
+! diacritics such as é and ô).
+
+! Standard US keyboard layout with following changes:
+! - AltGr + vowel = corresponding umlaut
+!   E.g. AltGr + o = ö, AltGr + O = Ö
+! - AltGr + s = ß
+! - AltGr + [ = ü, AltGr + { = Ü
+! - AltGr + ; = ö, AltGr + : = Ö
+! - AltGr + ' = ä, AltGr + " = Ä
+! - Some additional symbols on Shift + AltGr + <Number>, e.g.
+!   Shift + AltGr + 3 = §
+! - Caps Lock key is Compose key, e.g.
+!   <Caps Lock>, ', e = é
+!   (i.e. press keys in a row, not together)
+
+! No caps lock
+clear Lock
+
+! Left Alt key is mod1
+clear mod1
+add mod1 = Alt_L
+
+! Mode switch key is mod5
+clear mod5
+add mod5 = Mode_switch
+
+! AltGr: "Mode switch", second modifier (first is shift)
+keycode 108 = Mode_switch
+
+! Compose on caps lock
+keycode 66 = Multi_key
+
+! <key> <key with shift> <key with altgr> <key with altgr and shift>
+! 1 ! ¹
+keycode 10 = 1 exclam onesuperior
+! 2 @ ²
+keycode 11 = 2 at twosuperior
+! 3 # ³ §
+keycode 12 = 3 numbersign threesuperior section
+! 4 $ 
+keycode 13 = 4 dollar currency
+! - _ ß
+keycode 20 = minus underscore ssharp
+! u U ü Ü
+keycode 30 = u U udiaeresis Udiaeresis
+! o O ö Ö
+keycode 32 = o O odiaeresis Odiaeresis
+! [ { ü Ü
+keycode 34 = bracketleft braceleft udiaeresis Udiaeresis
+! a A ä Ä
+keycode 38 = a A adiaeresis Adiaeresis
+! s S ß
+keycode 39 = s S ssharp
+! ; : ö Ö
+keycode 47 = semicolon colon odiaeresis Odiaeresis
+! ' " ä Ä
+keycode 48 = apostrophe quotedbl adiaeresis Adiaeresis
+! ` ~ ° ¯
+keycode 49 = grave asciitilde degree macron
+! x X ×
+keycode 53 = x X multiply
+! c C ¢
+keycode 54 = c C cent
+! m M µ
+keycode 58 = m M mu
+! . > ·
+keycode 60 = period greater periodcentered
+! < > « »  Key is usually not present on QWERTY keyboard
+keycode 94 = less greater guillemotleft guillemotright 
+! q Q @
+keycode 24 = q Q at
+! e E €
+keycode 26 = e E EuroSign EuroSign
+

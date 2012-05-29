@@ -1,0 +1,94 @@
+! Colors
+! ANSI colors are fine, except the dark blue, which is hardly readable.
+XTerm*color12: #41a7ea
+
+! Xterm/Urxvt
+XTerm*background: black
+XTerm*foreground: lightgrey
+XTerm*saveLines: 1000
+XTerm*titleBar: False
+XTerm*loginShell: True
+XTerm.eightBitOutput: True
+
+! Urxvt
+URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs: true
+URxvt*perl-lib: /users/a_textor/.urxvt/
+URxvt.perl-ext: selection,mark-yank-urls
+URxvt*urlLauncher: opera
+
+URxvt*termName:           rxvt-unicode
+URxvt*geometry:           159x60
+URxvt*loginShell:         true
+URxvt*jumpScroll:         true
+URxvt*scrollstyle:        plain
+URxvt*scrollBar:          false
+URxvt*scrollBar_right:    true
+URxvt*inheritPixmap:      true
+URxvt*tintColor:          grey
+URxvt*shading:            20
+URxvt*background:         black
+URxvt*foreground:         lightgrey
+URxvt*color12:            #41a7ea
+URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:CODE2000,xft:Symbola
+URxvt*title:              terminal
+URxvt*saveLines:          1000
+URxvt*internalBorder:     3
+
+! xcalc
+xcalc*geometry: 200x275
+xcalc.ti.bevel.background: #111111
+xcalc.ti.bevel.screen.background: Black
+xcalc.ti.bevel.screen.DEG.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.RAD.background: Black
+xcalc.ti.bevel.screen.RAD.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.GRAD.background: Black
+xcalc.ti.bevel.screen.GRAD.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.INV.background: Black
+xcalc.ti.bevel.screen.INV.foreground: Red
+xcalc.ti.bevel.screen.LCD.background: Black
+xcalc.ti.bevel.screen.LCD.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.LCD.shadowWidth: 0
+xcalc.ti.bevel.screen.M.background: Black
+xcalc.ti.bevel.screen.M.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.P.background: Black
+xcalc.ti.bevel.screen.P.foreground: Yellow
+xcalc.ti.bevel.screen.DEG.background: Black
+xcalc.ti.background: #333333
+xcalc.ti.Command.foreground: White
+xcalc.ti.Command.background: #777777
+xcalc.ti.button5.background: Orange3
+xcalc.ti.button19.background: #611161
+xcalc.ti.button18.background: #611161
+xcalc.ti.button20.background: #611111
+xcalc.ti.button25.background: #722222
+xcalc.ti.button30.background: #833333
+xcalc.ti.button35.background: #944444
+xcalc.ti.button40.background: #a55555
+xcalc.ti.button22.background: #222262
+xcalc.ti.button23.background: #222262
+xcalc.ti.button24.background: #222272
+xcalc.ti.button27.background: #333373
+xcalc.ti.button28.background: #333373
+xcalc.ti.button29.background: #333373
+xcalc.ti.button32.background: #444484
+xcalc.ti.button33.background: #444484
+xcalc.ti.button34.background: #444484
+xcalc.ti.button37.background: #555595
+xcalc.ti.button38.background: #555595
+xcalc.ti.button39.background: #555595
+
+! xlock
+XLock*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
+XLock.background: #012C66
+XLock.foreground: #6D8AA2
+XLock.username: Username: 
+XLock.info: Enter password to unlock!
+
+! X Cursors
+Xcursor.size: 25
+
+! Xdvi
+XDvi.background: white
+XDvi:shrinkFactor: 7
+

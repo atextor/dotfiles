@@ -1,0 +1,18 @@
+# .xinitrc
+
+# Keyboard
+/usr/bin/setxkbmap us
+
+# Ressources 
+[ -f "$HOME/.Xresources" ] && xrdb - merge "$HOME/.Xresources"
+
+# Mouse
+xset m 3/2 0
+#xsetroot -cursor_name left_ptr
+#xmodmap /users/a_textor/.Xmodmap
+#eval `cat $HOME/.fehbg`
+
+# Windowmanager
+~/.kde/Autostart/dualscreen.sh
+[ -f "$HOME/.Xmodmap" ] && xmodmap "$HOME/.Xmodmap"
+exec xfce4-session
