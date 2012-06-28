@@ -364,6 +364,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #export GDK_NATIVE_WINDOWS=1
 export RI="--format ansi -T"
 export SBT_OPTS=-Xmx512M
+#[ "$TERM" = "screen.rxvt" ] && export TERM="screen"
 
 # Misc convenience vars vars
 export FH="textor@login1.cs.hs-rm.de"
@@ -453,17 +454,7 @@ lab)
 	export JAVA_HOME=/opt/jdk/jdk1.7
 	export ANT_HOME=/opt/java/ant
 	javaNoProxy="$(echo $noProxy | tr , '|')"
-	read -r -d '' ANT_OPTS <<-EOF
-		-Dhttp.proxyHost=${proxyHost} 
-		-Dhttp.proxyPort=${proxyPort} 
-		-Dhttp.nonProxyHosts=${javaNoProxy} 
-		-Dhttps.proxyHost=${proxyHost} 
-		-Dhttps.proxyPort=${proxyPort} 
-		-Dftp.proxyHost=${proxyHost} 
-		-Dftp.proxyPort=${proxyPort} 
-		-Dftp.nonProxyHosts=${javaNoProxy}
-	EOF
-	export ANT_OPTS
+	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
 
 	export PEGASUS_ROOT=$HOME/thesis/pegasus
 	export PEGASUS_HOME=$HOME/thesis/pegasus
@@ -613,6 +604,11 @@ function convertmeizu() {
 # Currently does not take care of corner cases (e.g. cd'ing into the archive from multiple shells
 # simultaneously).
 function cd() {
+	if [ "$1" = "-" ]; then
+		builtin cd -
+		return
+	fi
+
 	mountdir=$HOME/.mounts
 	orghome=$(readlink -f $HOME)
 
