@@ -40,6 +40,7 @@ set   showmode               " if in insert, replace or visual mode, show it in 
 set nosmartindent            " smart autoindenting?  (for C source code, use `cindent')
 set   softtabstop=4          " number of spaces for tabs
 set   splitbelow             " open new windows below current one?
+set nojoinspaces             " don't insert double spaces when formatting paragraphs
 set nostartofline            " when off, tries to keep cursor in current column
 set   statusline=[%n]\ %f\ %(\ %M%R%H)%)\ <%l\,%c%V>\ %P\ ASCII=%b\ HEX=%B
 set   tabstop=4              " tab width

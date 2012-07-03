@@ -278,6 +278,7 @@ alias dos2unix='perl -pi -e "s/\r//g"'
 alias osx2unix='perl -pi -e "s/\r/\n/g"'
 alias unix2dos='perl -pi -e "s/\n/\r\n/g"'
 alias chomp="tr -d $'\n'"
+alias acroread='acroread 2>/dev/null'
 
 #---------------------------------------------------------------------
 # Bash completion
