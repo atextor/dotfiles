@@ -1,4 +1,5 @@
 # texray's ~/.bashrc
+
 # Author: Andreas Textor <textor.andreas@googlemail.com>
 
 # ANSI Colors
@@ -318,7 +319,7 @@ export LC_TIME=$unt_loc
 export LC_MONETARY=$unt_loc
 export LC_PAPER=$unt_loc
 
-export PATH="/bin:/usr/bin:/sbin"
+export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 
 # PATH (append; default PATH is specified in /etc/profile)
 [ -d /usr/local/bin ] && PATH="/usr/local/bin:$PATH"
@@ -437,13 +438,20 @@ lab)
 	alias fixresolution='xrandr -s 2560x1024 --output HDMI2 --right-of VGA1'
 	# ka = keine ablenkung = no distractions = black out 2nd monitor
 	alias ka='xlock -nolock -mode blank -geometry 1280x1024+1280+0 +grabmouse'
-	alias off1='rdesktop -g 2560x980 -f -z -x 0x80 -u a_textor -d vs off1'
-	alias off1s='rdesktop -g 1280x980 -f -z -x 0x80 -u a_textor -d vs off1'
+	# padsp = pulse audio wrapper, needed for sound, as rdesktop on ubuntu has no alsa support, and ubuntu
+	# doesn't come with snd-pcm-oss for some reason. The foo part is necessary to work around a rdesktop bug
+	# where sound only works when at least one other device is redirected (-r) as well.
+	# -g - geometry
+	# -f - fullscreen
+	# -x 0x80 - Nice cursor and antialiased fonts
+	alias off1='padsp rdesktop -g 3200x980 -f -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
+	alias off1s='padsp rdesktop -g 1270x960 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
 	alias off2='rdesktop -g 1280x980 -f -z -x 0x80 -u a_textor -d vs off2'
+	alias off2s='rdesktop -g 1910x1136 -z -x 0x80 -u a_textor -d vs off2'
 
 	proxyHost="proxy.cs.hs-rm.de"
 	proxyPort=8080
-	socksHost=8080
+	socksHost="socks.cs.hs-rm.de"
 	socksPort=1080
 	noProxy="wwwprod.vs.cs.hs-rm.de,localhost,www-intern.cs.hs-rm.de"
 	export http_proxy="http://${proxyHost}:${proxyPort}"
