@@ -258,6 +258,17 @@ require most quiet && {
 	alias lo='less'
 }
 
+# colourize things if grc is available
+require grc quiet && {
+	alias ping='grc -es --colour=auto ping'
+	alias make='grc -es --colour=auto make'
+	alias gcc='grc -es --colour=auto gcc'
+	alias g++='grc -es --colour=auto g++'
+	alias ld='grc -es --colour=auto ld'
+	alias netstat='grc -es --colour=auto netstat'
+	alias traceroute='grc -es --colour=auto traceroute'
+}
+
 # misc. convenience binds
 alias startx='exec startx -- -nolisten tcp'
 alias :q='exit'
@@ -323,7 +334,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 
 # PATH (append; default PATH is specified in /etc/profile)
 [ -d /usr/local/bin ] && PATH="/usr/local/bin:$PATH"
-[ ! `echo $PATH|grep acoc` ] && [ -e /usr/local/acoc/bin ] && PATH="/usr/local/acoc/bin:$PATH"
+#[ ! `echo $PATH|grep acoc` ] && [ -e /usr/local/acoc/bin ] && PATH="/usr/local/acoc/bin:$PATH"
 [ -d $HOME/bin ] && PATH="$HOME/bin:$PATH"
 export PATH
 
