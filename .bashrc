@@ -437,11 +437,13 @@ home)
 	alias fixresolution='xrandr -s 1920x1080'
 
 	export ECLIPSE_HOME=/opt/eclipse
+	export PATH=$JAVA_HOME/bin:$PATH
 	;;
 laptop)
 	alias wget='wget -c --tries=235'
 	alias rn='rename.pl'
 	alias fixresoluton='xrandr -s 1440x900'
+	export PATH=$JAVA_HOME/bin:$PATH
 	;;
 lab)
 	alias wget='wget -Y on' # to use the proxy
