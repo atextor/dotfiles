@@ -291,6 +291,7 @@ alias osx2unix='perl -pi -e "s/\r/\n/g"'
 alias unix2dos='perl -pi -e "s/\n/\r\n/g"'
 alias chomp="tr -d $'\n'"
 alias acroread='acroread 2>/dev/null'
+alias evince='evince 2>/dev/null'
 
 #---------------------------------------------------------------------
 # Bash completion
@@ -395,7 +396,7 @@ setterm -blank 0    # don't blank console
 set -o notify       # notify when bg job done
 set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
-set nobeep
+#set nobeep
 stty -ixon
 
 # run function on logout
@@ -458,9 +459,11 @@ lab)
 	# -f - fullscreen
 	# -x 0x80 - Nice cursor and antialiased fonts
 	alias off1='padsp rdesktop -g 3200x980 -f -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
-	alias off1s='padsp rdesktop -g 1270x960 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
+	alias off1sl='padsp rdesktop -g 1910x1136 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
+	alias off1sr='padsp rdesktop -g 1270x960 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs off1'
 	alias off2='rdesktop -g 1280x980 -f -z -x 0x80 -u a_textor -d vs off2'
-	alias off2s='rdesktop -g 1910x1136 -z -x 0x80 -u a_textor -d vs off2'
+	alias off2sl='rdesktop -g 1910x1136 -z -x 0x80 -u a_textor -d vs off2'
+	alias off2sr='rdesktop -g 1270x960 -z -x 0x80 -u a_textor -d vs off2'
 
 	proxyHost="proxy.cs.hs-rm.de"
 	proxyPort=8080

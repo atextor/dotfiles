@@ -1,3 +1,5 @@
+# Andreas Textor's ~/.screenrc
+
 autodetach on
 startup_message off
 defscrollback 1024
@@ -10,13 +12,18 @@ crlf off             # this affects the copying of text regions with the `C-a ['
 vbell off
 shelltitle "sh"
 sorendition Gk       # highlighting format for text marking and printing messages
-nethack on
+defutf8 on
+#nethack on
 
 #termcapinfo rxvt ti@:te@
 hardstatus alwayslastline "  %{= kw}%?%-Lw%?%{= bw}%n*%f %t%?(%u)%?%{= kw}%?%+Lw%? %=%{wk} %d.%m.%Y %{yk} %0c "
 
 term screen-256color
 terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+bind q select 10
+bind w select 11
+bind e only
 
 screen 0
 screen 1
