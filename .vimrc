@@ -53,7 +53,7 @@ set   wildchar=<TAB>
 set   wildignore=*.o
 set   wrapmargin=1           " wrap if n spaces from right border
 "set tags=/path/to/tags
-colorscheme elflord
+colorscheme desert
 
 " shell: set it according to the OS being used
 if has("linux")
@@ -70,7 +70,7 @@ if has("gui_running")
 	set mouse=a
 	set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
 	set background=dark
-	colorscheme elflord
+	colorscheme desert
 " specific settings for text mode
 else
 	" xterm mousewheel
