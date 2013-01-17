@@ -292,6 +292,8 @@ alias unix2dos='perl -pi -e "s/\n/\r\n/g"'
 alias chomp="tr -d $'\n'"
 alias acroread='acroread 2>/dev/null'
 alias evince='evince 2>/dev/null'
+alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 
 #---------------------------------------------------------------------
 # Bash completion
@@ -531,6 +533,11 @@ esac
 #---------------------------------------------------------------------
 # Functions for general use
 #---------------------------------------------------------------------
+
+# Find and replace text. Usage: findreplace <search> <replace> <in>
+findreplace(){
+    find . -name "*${3}" -type f | xargs perl -pi -e 's/${1}/${2}/g'
+}
 
 # VLC CLI control. You need to enable the HTTP interface in
 # Tools->Preferences->(switch to "show settings: all")->Interface->
