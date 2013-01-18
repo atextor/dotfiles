@@ -6,5 +6,7 @@
 [user]
 	name = Andreas Textor
 	email = textor.andreas@googlemail.com
+[http]
+	proxy = http://proxy.cs.hs-rm.de:8080/
 [color]
-.   ui = true
+	ui = true
