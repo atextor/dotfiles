@@ -56,6 +56,8 @@ keycode 34 = bracketleft braceleft udiaeresis Udiaeresis
 keycode 38 = a A adiaeresis Adiaeresis
 ! s S ß
 keycode 39 = s S ssharp
+! l L ♥
+keycode 46 = l L U2665
 ! ; : ö Ö
 keycode 47 = semicolon colon odiaeresis Odiaeresis
 ! ' " ä Ä
@@ -64,8 +66,8 @@ keycode 48 = apostrophe quotedbl adiaeresis Adiaeresis
 keycode 49 = grave asciitilde degree macron
 ! x X ×
 keycode 53 = x X multiply
-! c C ¢
-keycode 54 = c C cent
+! c C ಠ
+keycode 54 = c C U0CA0
 ! m M µ
 keycode 58 = m M mu
 ! . > ·
