@@ -167,6 +167,10 @@ __prompt_vcs() {
 			esac
 		done <<< "$(git status --porcelain 2> /dev/null)"
 
+		additional=
+		ahead=$(git status 2>/dev/null|/bin/grep -Eo 'ahead of .+ by [0-9]+ commit'|cut -d' ' -f5)
+		[ ! -z $ahead ] && additional="$LIGHTBLUE↑${ahead}$NONE"
+
 		stat=
 		[ $staged -eq 1 ] && stat+="$LIGHTGREEN$vcs_status_indicator$NONE"
 		[ $unstaged -eq 1 ] && stat+="$YELLOW$vcs_status_indicator$NONE"
@@ -195,6 +199,7 @@ __prompt_vcs() {
 			esac
 		done <<< "$(svn status 2> /dev/null)"
 
+		additional=
 		stat=
 		[ $added -eq 1 ] && stat+="$LIGHTGREEN$vcs_status_indicator$NONE"
 		[ $modified -eq 1 ] && stat+="$YELLOW$vcs_status_indicator$NONE"
@@ -203,7 +208,7 @@ __prompt_vcs() {
 	}
 	
 	git_dir || svn_dir || return
-	echo -e "${NONE}[${WHITE}${vcs}${LIGHTBLUE}|${GREEN}${ref}${stat}${NONE}]"
+	echo -e "${NONE}[${WHITE}${vcs}${LIGHTBLUE}|${GREEN}${ref}${stat}${additional}${NONE}]"
 }
 
 # Function that constructs the prompt string
