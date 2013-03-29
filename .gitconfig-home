@@ -1,0 +1,12 @@
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[user]
+	email = textor.andreas@googlemail.com
+	name = Andreas Textor
+[push]
+	default = simple
+[color]
+	ui = true
