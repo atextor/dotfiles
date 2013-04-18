@@ -1,3 +1,7 @@
+# texray's ~/.dir_colors
+# Author: Andreas Textor <textor.andreas@googlemail.com>
+# Last change: 14.02.2010
+#
 # COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
 # pipes. 'all' adds color characters to all output. 'none' shuts colorization
 # off.
@@ -48,6 +52,7 @@ TERM screen-256color-bce
 TERM screen-bce
 TERM screen-w
 TERM screen.linux
+TERM screen.rxvt
 TERM vt100
 TERM xterm
 TERM xterm-16color
