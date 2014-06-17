@@ -52,6 +52,7 @@ TERM screen-256color-bce
 TERM screen-bce
 TERM screen-w
 TERM screen.linux
+TERM screen.rxvt
 TERM vt100
 TERM xterm
 TERM xterm-16color

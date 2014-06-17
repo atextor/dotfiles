@@ -290,6 +290,7 @@ alias acroread='acroread 2>/dev/null'
 alias evince='evince 2>/dev/null'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+alias redshift='redshift -l 50.0856:8.2387'
 
 #---------------------------------------------------------------------
 # Bash completion
