@@ -10,3 +10,5 @@
 #	proxy = http://proxy.cs.hs-rm.de:8080/
 [color]
 	ui = true
+[push]
+	default = simple
