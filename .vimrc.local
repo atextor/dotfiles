@@ -1,0 +1,102 @@
+" This vimrc depends on the spf13 vim distribution.
+" Go to http://vim.spf13.com/ and install spf13,
+" then mv this vimrc to ~/.vimrc.local
+
+" Navigation mappings
+map <C-j> <ESC>30j<CR>
+map <C-k> <ESC>30k<CR>
+map <C-h> :bp<CR>
+map <C-l> :bn<CR>
+
+" Close buffers using CTRL+W, like in many other applications.
+map <C-w> :bdelete<CR>
+
+" So now, we need another binding for switching windows, normally <C-w>w.
+" Let's use <C-q> for this, since this is only an alias for Visual Block selection.
+" Visual Block Selection is available using <C-v> anyways - unless on a Windows system.
+map <C-q> :wincmd w<CR> 
+
+" Fugitive bind to stage
+map ,ga :Gwrite<CR>
+
+" Delete trailing whitespace
+nmap    <F9> :%s/\s\+$//<CR>
+vmap    <F9> :s/\s\+$//<CR>
+
+" Delete trailing \r
+cmap    ,rcm  :%s/\r//g<CR>"
+
+set nohlsearch  " don't highlight search results
+set nofoldenable    "dont' autofold code
+"set listchars=tab:.\ ,trail:\•,extends:#
+set scrolloff=10             " vim will already start scrolling when n lines from bottom
+set scrolljump=0
+set mouse=c
+set nojoinspaces             " don't insert double spaces when formatting paragraphs
+set noexpandtab              " expand tabs to spaces?
+set whichwrap=
+set virtualedit=             " Allow for cursor beyond last character
+set noesckeys                " allow usage of cursor keys within insert mode?
+
+" Enable 256 colors
+if &term == 'rxvt-unicode' || &term == 'rxvt-unicode-256color' || &term == 'screen-256color'
+  set t_Co=256
+endif
+
+" =256 (default) actually messes up colors in vim in screen in urxvt-256color
+let g:solarized_termcolors=16
+set background=dark
+
+" Escape codes: \033 is ESC, \007 is BEL. To enter in vim, press CTRL+V <ESC> or CTRL+V 7 respectively.
+" To set window title:
+" \033]2;TITLE\007
+" To set current screen title:
+" \033kTITLE\033\\
+" The following sets the window title (i.e., title bar of urxvt in which vim is open)
+if &term == "screen" || &term == "screen-256color"
+  set t_ts=]2;
+  set t_fs=
+  set title
+endif
+
+" Disable autocompletion while I type
+let g:neocomplcache_disable_auto_complete=1
+
+" Settings for plugin minibufexpl.vim. To install plugin in spf13/vundle: :PluginSearch minibufexpl
+" Put MiniBufExpl to the bottom
+let g:miniBufExplBRSplit=1
+let g:miniBufExplStatusLineText=""
+
+" LaTeX
+" In order to use the LaTeX mappings, you need to have the following script as `xdvi-remote.sh'
+" in your path which in turn requires xsendkey (http://people.csail.mit.edu/adonovan/hacks/xsendkey.html):
+"
+" #!/bin/bash
+" if [ "x$DISPLAY" = "x" ]; then exit; fi
+" x="x"
+" case "$1" in
+" 'refresh') x="Control+R";;
+" 'pgdown') x="n";;
+" 'pgup') x="p";;
+" *) echo "Usage: $0 [refresh|pgdown|pgup]"
+" esac
+" [ "$x" != "x" ] && xsendkey -window $(xwininfo -root -tree|grep xdvik|sed 's/^ *//g'|cut -d' ' -f1) "$x"
+augroup latex
+	au!
+	au FileType tex set tw=100 fo=aw2tq
+	" Use Alt-j and Alt-k in vim to go a page up or down in an open xdvi instance
+	au FileType tex map <ESC>j :silent !evince-remote.sh pgdown 2>&1 >/dev/null<CR>
+	au FileType tex map <ESC>k :silent !evince-remote.sh pgup 2>&1 >/dev/null<CR>
+	au FileType tex map ,x :execute '!xdvi -editor "vim --servername vimtex --remote +\%l \%f" -sourceposition ' . line(".") . expand("%") . " " . expand("%:r") . ".dvi &"<CR><CR>
+	"au FileType tex map ,l :w!<CR>:!clear; latex %; xdvi %<.dvi &<CR><CR>
+	au FileType tex map ,l :w!<CR>:!make 2>&1 >/dev/null && xdvi-remote.sh refresh<CR><CR>
+augroup END
+
+
+" Gvim settings
+if has('gui_running')
+  set guifont=Source\ Code\ Pro\ Medium\ 11
+  set vb t_vb=
+  set nospell
+endif
+

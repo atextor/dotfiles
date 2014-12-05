@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/import/users/users/a_textor/docs/papers/DAIS2012'
-let g:netrw_dirhist_2='/import/users/users/a_textor/docs/papers/SEMAPRO2012'
-let g:netrw_dirhist_3='/import/users/users/a_textor/abgabe/guenther/03/aufg1/include'
-let g:netrw_dirhist_4='/local/a_textor/git/permanenta-temp/.git'
