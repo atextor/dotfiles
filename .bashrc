@@ -478,7 +478,7 @@ lab)
 	export socks_proxy="http://${socksHost}:${socksPort}"
 	export no_proxy="$noProxy"
 
-	export JAVA_HOME=/opt/jdk/jdk1.7
+	export JAVA_HOME=/opt/jdk/jdk1.8
 	export ANT_HOME=/opt/java/ant
 	javaNoProxy="$(echo $noProxy | tr , '|')"
 	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
@@ -604,30 +604,9 @@ function recentlyused() {
 	history | awk '{print $2}' | awk 'BEGIN {FS="|"} {print $1}' | sort | uniq -c | sort -rn | head -10
 }
 
-# Recodes a video for use with the Meizu M6 Miniplayer
-# Command and description taken from http://www.taiabati.com/linux/video-for-meizu.html
-function convertmeizu() {
-	# The previous example outputs a video of 320x240, but we are assuming that the input file is in 4:3 scale (like PAL).
-	# If the source video has a different aspect ratio (for example 16:9), we will need a letterboxing option. Let's imagine
-	# we downloaded a video having a resolution of 448x256. If we scale down the width to 320 then we have a proportional
-	# height of 176. So we need 64 extra pixel, meaning a black band of 32 pixels on the top and another at the bottom.
-	# The command will become like this:
-	#
-	# mencoder Massive-Attack_karmacoma_1995.avi -oac mp3lame -lameopts cbr:mode=2:br=96 -af resample=44100 -srate 44100
-	# -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:cbp:trell:vbitrate=300 -vf scale=320:176 -vf-add expand=:240
-	# -ffourcc XVID -o MA_karmacoma_95.avi -vf scale=320:176 -vf-add expand=:240
-	# This means that the scaled video size will be 320x176 like said before, while the -vf-add option will add extra
-	# black pixels over and under yuor frame in order to reach the 240 required height. Clever, eh? 
-
-	# This assumes 4:3 video. TODO: Detect ratio and implement the above description for recode
-	if [ $# -ne 1 ] || [ ! -e "$1" ]; then
-		echo "Usage: convertmeizu file.video"
-		return
-	fi
-	require mencoder && \
-		mencoder "$1" -oac mp3lame -lameopts cbr:mode=2:br=96 -af resample=44100 \
-			-srate 44100 -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:cbp:trell:vbitrate=300 \
-			-vf scale=320:240 -ffourcc XVID -o "${1%.*}-meizu.avi"
+# Scales down a video. Usage: scale_down somevideo.mp4
+function scale_down() {
+	require ffmpeg && ffmpeg -i "$1" -vf scale=480:-1 -c:a libmp3lame -c:v libx264 "${1%.*}-small.mp4"
 }
 
 # CDable .zip/.jar archives using fuse-zip
@@ -891,5 +870,4 @@ function screen_remote() {
 	screen -p $2 -X paste 1
 	screen -p $2 -X stuff $'\n'
 }
-
 
