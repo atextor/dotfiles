@@ -3,44 +3,33 @@
 # Author: Andreas Textor <textor.andreas@googlemail.com>
 
 # ANSI Colors
-export NONE="\033[0m"
-export BLACK="\033[0;30m"
-export DARKGRAY="\033[1;30m"
-export RED="\033[0;31m"
-export LIGHTRED="\033[1;31m"
-export GREEN="\033[0;32m"
-export LIGHTGREEN="\033[1;32m"
-export BROWN="\033[0;33m"
-export YELLOW="\033[1;33m"
-export BLUE="\033[0;34m"
-export LIGHTBLUE="\033[1;34m"
-export PURPLE="\033[0;35m"
-export LIGHTPURPLE="\033[1;35m"
-export CYAN="\033[0;36m"
-export LIGHTCYAN="\033[1;36m"
-export LIGHTGRAY="\033[0;37m"
-export WHITE="\033[1;37m"
-# Convenience versions with \[ \] escapes. These are needed
-# When colors are used e.g. in prompt variables, so that
-# bash computes the length correctly. When possible use these
-# instead.
-export C_NONE="\[\033[0m\]"
-export C_BLACK="\[\033[0;30m\]"
-export C_DARKGRAY="\[\033[1;30m\]"
-export C_RED="\[\033[0;31m\]"
-export C_LIGHTRED="\[\033[1;31m\]"
-export C_GREEN="\[\033[0;32m\]"
-export C_LIGHTGREEN="\[\033[1;32m\]"
-export C_BROWN="\[\033[0;33m\]"
-export C_YELLOW="\[\033[1;33m\]"
-export C_BLUE="\[\033[0;34m\]"
-export C_LIGHTBLUE="\[\033[1;34m\]"
-export C_PURPLE="\[\033[0;35m\]"
-export C_LIGHTPURPLE="\[\033[1;35m\]"
-export C_CYAN="\[\033[0;36m\]"
-export C_LIGHTCYAN="\[\033[1;36m\]"
-export C_LIGHTGRAY="\[\033[0;37m\]"
-export C_WHITE="\[\033[1;37m\]"
+export NONE="$(tput sgr0)"
+export BLACK="$(tput setaf 0)"
+export RED="$(tput setaf 1)"
+export GREEN="$(tput setaf 2)"
+export BROWN="$(tput setaf 3)"
+export BLUE="$(tput setaf 4)"
+export PURPLE="$(tput setaf 5)"
+export CYAN="$(tput setaf 6)"
+export LIGHTGRAY="$(tput setaf 7)"
+
+export DARKGRAY="$(tput bold)${BLACK}"
+export LIGHTRED="$(tput bold)${RED}"
+export LIGHTGREEN="$(tput bold)${GREEN}"
+export YELLOW="$(tput bold)${BROWN}"
+export LIGHTBLUE="$(tput bold)${BLUE}"
+export LIGHTPURPLE="$(tput bold)${PURPLE}"
+export LIGHTCYAN="$(tput bold)${CYAN}"
+export WHITE="$(tput bold)${LIGHTGRAY}"
+
+# Colors used in prompt and other places
+color_dir="$BROWN"
+color_extra_info="$GREEN"
+color_additional="$BLUE"
+
+color_ok="$GREEN"
+color_medium="$BROWN"
+color_alert="$RED"
 
 #---------------------------------------------------------------------
 # Utility functions - other functions depend on them.
@@ -169,12 +158,12 @@ __prompt_vcs() {
 
 		additional=
 		ahead=$(git status 2>/dev/null|/bin/grep -Eo 'ahead of .+ by [0-9]+ commit'|cut -d' ' -f5)
-		[ ! -z $ahead ] && additional="$LIGHTBLUE↑${ahead}$NONE"
+		[ ! -z $ahead ] && additional="$NONE$color_additional↑${ahead}$NONE"
 
 		stat=
-		[ $staged -eq 1 ] && stat+="$LIGHTGREEN$vcs_status_indicator$NONE"
-		[ $unstaged -eq 1 ] && stat+="$YELLOW$vcs_status_indicator$NONE"
-		[ $untracked -eq 1 ] && stat+="$LIGHTRED$vcs_status_indicator$NONE"
+		[ $staged -eq 1 ] && stat+="$color_ok$vcs_status_indicator$NONE"
+		[ $unstaged -eq 1 ] && stat+="$color_medium$vcs_status_indicator$NONE"
+		[ $untracked -eq 1 ] && stat+="$color_alert$vcs_status_indicator$NONE"
 		return 0
 	}
 
@@ -201,33 +190,35 @@ __prompt_vcs() {
 
 		additional=
 		stat=
-		[ $added -eq 1 ] && stat+="$LIGHTGREEN$vcs_status_indicator$NONE"
-		[ $modified -eq 1 ] && stat+="$YELLOW$vcs_status_indicator$NONE"
-		[ $untracked -eq 1 ] && stat+="$LIGHTRED$vcs_status_indicator$NONE"
+		[ $added -eq 1 ] && stat+="$color_ok$vcs_status_indicator$NONE"
+		[ $modified -eq 1 ] && stat+="$color_medium$vcs_status_indicator$NONE"
+		[ $untracked -eq 1 ] && stat+="$color_alert$vcs_status_indicator$NONE"
 		return 0
 	}
 	
 	git_dir || svn_dir || return
-	echo -e "${NONE}[${WHITE}${vcs}${LIGHTBLUE}|${GREEN}${ref}${stat}${additional}${NONE}]"
+	echo -e "${NONE}[${WHITE}${vcs}${NONE}${color_additional}|${GREEN}${ref}${stat}${additional}${NONE}]"
 }
 
 # Function that constructs the prompt string
 prompt() {
 	if [ "`whoami`" = "root" ]; then
-		user="$C_LIGHTRED\u"
+		user="\[${color_alert}\]\u"
 	else
-		user="$C_WHITE\u"
+		user="\[$WHITE\]\u"
 	fi
-	host="${C_LIGHTBLUE}@${C_WHITE}\h"
-	curdir="${C_NONE}[${C_YELLOW}\w${C_NONE}]"
-	vcsinfo="${C_NONE}\$(__prompt_vcs)"
+	host="\[${NONE}${color_additional}\]@\[${WHITE}\]\h"
+	curdir="\[${NONE}\][\[${color_dir}\]\w\[${NONE}\]]"
+	vcsinfo="\[${NONE}\]\$(__prompt_vcs)"
 
-	echo "${user}${host}${curdir}${vcsinfo}${C_NONE}\\$ "
+	echo -e "${user}${host}${curdir}${vcsinfo}\[${NONE}\]\\$ "
 }
 
 #---------------------------------------------------------------------
 # Global Aliases
 #---------------------------------------------------------------------
+
+alias urxvt='urxvt +tr'
 
 alias ls='COLUMNS=$COLUMNS ls -F --color=auto'
 alias ll='ls -l'
@@ -352,7 +343,7 @@ export PATH
 
 # Prompt
 export PS1=$(prompt) # see above function
-export PS2=""$C_WHITE">"$C_NONE" "
+export PS2="\[${WHITE}\]>\[${NONE}\] "
 
 # Bash Settings
 export HISTFILE="$HOME/.bash_history"
@@ -472,6 +463,9 @@ lab)
 	alias off2='rdesktop -g 1280x980 -f -z -x 0x80 -u a_textor -d vs off2'
 	alias off2sl='rdesktop -g 1910x1136 -z -x 0x80 -u a_textor -d vs off2'
 	alias off2sr='rdesktop -g 1270x960 -z -x 0x80 -u a_textor -d vs off2'
+	alias lf='padsp rdesktop -g 3200x980 -f -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
+	alias lfsl='padsp rdesktop -g 1910x1136 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
+	alias lfsr='padsp rdesktop -g 1270x960 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
 
 	proxyHost="proxy.cs.hs-rm.de"
 	proxyPort=8080
@@ -484,7 +478,7 @@ lab)
 	export socks_proxy="http://${socksHost}:${socksPort}"
 	export no_proxy="$noProxy"
 
-	export JAVA_HOME=/opt/jdk/jdk1.7
+	export JAVA_HOME=/opt/jdk/jdk1.8
 	export ANT_HOME=/opt/java/ant
 	javaNoProxy="$(echo $noProxy | tr , '|')"
 	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
@@ -610,30 +604,9 @@ function recentlyused() {
 	history | awk '{print $2}' | awk 'BEGIN {FS="|"} {print $1}' | sort | uniq -c | sort -rn | head -10
 }
 
-# Recodes a video for use with the Meizu M6 Miniplayer
-# Command and description taken from http://www.taiabati.com/linux/video-for-meizu.html
-function convertmeizu() {
-	# The previous example outputs a video of 320x240, but we are assuming that the input file is in 4:3 scale (like PAL).
-	# If the source video has a different aspect ratio (for example 16:9), we will need a letterboxing option. Let's imagine
-	# we downloaded a video having a resolution of 448x256. If we scale down the width to 320 then we have a proportional
-	# height of 176. So we need 64 extra pixel, meaning a black band of 32 pixels on the top and another at the bottom.
-	# The command will become like this:
-	#
-	# mencoder Massive-Attack_karmacoma_1995.avi -oac mp3lame -lameopts cbr:mode=2:br=96 -af resample=44100 -srate 44100
-	# -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:cbp:trell:vbitrate=300 -vf scale=320:176 -vf-add expand=:240
-	# -ffourcc XVID -o MA_karmacoma_95.avi -vf scale=320:176 -vf-add expand=:240
-	# This means that the scaled video size will be 320x176 like said before, while the -vf-add option will add extra
-	# black pixels over and under yuor frame in order to reach the 240 required height. Clever, eh? 
-
-	# This assumes 4:3 video. TODO: Detect ratio and implement the above description for recode
-	if [ $# -ne 1 ] || [ ! -e "$1" ]; then
-		echo "Usage: convertmeizu file.video"
-		return
-	fi
-	require mencoder && \
-		mencoder "$1" -oac mp3lame -lameopts cbr:mode=2:br=96 -af resample=44100 \
-			-srate 44100 -ofps 20 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:cbp:trell:vbitrate=300 \
-			-vf scale=320:240 -ffourcc XVID -o "${1%.*}-meizu.avi"
+# Scales down a video. Usage: scale_down somevideo.mp4
+function scale_down() {
+	require ffmpeg && ffmpeg -i "$1" -vf scale=480:-1 -c:a libmp3lame -c:v libx264 "${1%.*}-small.mp4"
 }
 
 # CDable .zip/.jar archives using fuse-zip
@@ -669,7 +642,7 @@ function cd() {
 		else
 			# If we're still in the ZIP path, update PS1
 			updated_path="${PWD/$mountdir\/$INZIP/$INZIP_FILE}"
-			export PS1=${PS1ORG/\\w/${INZIP_DIR/$orghome/\~}/${C_LIGHTGREEN}${updated_path}}
+			export PS1=${PS1ORG/\\w/${INZIP_DIR/$orghome/\~}/${color_extra_info}${updated_path}}
 		fi
 	else
 	# Were are in a normal directory
@@ -693,7 +666,7 @@ function cd() {
 			export INZIP_DIR=$(dirname "$realpath")
 			export INZIP_FILE="$filename"
 			export PS1ORG="$PS1"
-			export PS1=${PS1ORG/\\w/${INZIP_DIR/$orghome/\~}/${C_LIGHTGREEN}${INZIP_FILE}}
+			export PS1=${PS1ORG/\\w/${INZIP_DIR/$orghome/\~}/${color_extra_info}${INZIP_FILE}}
 			builtin cd "$mountpoint"
 		else
 			# normal directory

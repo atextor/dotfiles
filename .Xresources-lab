@@ -1,39 +1,112 @@
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+
+! Dark
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+URxvt.intensityStyles:         false
+URxvt*background:              #002b36
+URxvt*foreground:              #839496
+URxvt*fadeColor:               #002b36
+URxvt*cursorColor:             #93a1a1
+URxvt*pointerColorBackground:  #586e75
+URxvt*pointerColorForeground:  #93a1a1
+
+URxvt*color0:                  #073642
+URxvt*color1:                  #dc322f
+URxvt*color2:                  #859900
+URxvt*color3:                  #b58900
+URxvt*color4:                  #268bd2
+URxvt*color5:                  #d33682
+URxvt*color6:                  #2aa198
+URxvt*color7:                  #eee8d5
+URxvt*color9:                  #cb4b16
+URxvt*color8:                  #002b36
+URxvt*color10:                 #93a1a1
+URxvt*color11:                 #839496
+URxvt*color12:                 #657b83
+URxvt*color13:                 #6c71c4
+URxvt*color14:                 #586e75
+URxvt*color15:                 #fdf6e3
+
 ! Colors
 ! ANSI colors are fine, except the dark blue, which is hardly readable.
-XTerm*color12: #41a7ea
+!XTerm*color12: #41a7ea
 
 ! Xterm/Urxvt
-XTerm*background: black
-XTerm*foreground: lightgrey
-XTerm*saveLines: 1000
-XTerm*titleBar: False
-XTerm*loginShell: True
-XTerm.eightBitOutput: True
+!XTerm*background: black
+!XTerm*foreground: lightgrey
+!XTerm*saveLines: 1000
+!XTerm*titleBar: False
+!XTerm*loginShell: True
+!XTerm.eightBitOutput: True
 
 ! Urxvt
 URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
 URxvt.underlineURLs: true
 URxvt*perl-lib: /users/a_textor/.urxvt/
 URxvt.perl-ext: selection,mark-yank-urls
-URxvt*urlLauncher: opera
+URxvt*urlLauncher: chromium-browser
 
-URxvt*termName:           rxvt-unicode
+URxvt*termName:           rxvt-unicode-256color
 URxvt*geometry:           159x60
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
 URxvt*scrollstyle:        plain
 URxvt*scrollBar:          false
 URxvt*scrollBar_right:    true
-URxvt*inheritPixmap:      true
-URxvt*tintColor:          grey
-URxvt*shading:            20
-URxvt*background:         black
-URxvt*foreground:         lightgrey
-URxvt*color12:            #41a7ea
-URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:CODE2000,xft:Symbola
+!URxvt*inheritPixmap:      true
+!URxvt*tintColor:          grey
+!URxvt*shading:            20
+!URxvt*background:         black
+!URxvt*foreground:         lightgrey
+!URxvt*color12:            #41a7ea
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11,xft:CODE2000,xft:Symbola
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,PowerlineSymbols:pixelsize=12,xft:CODE2000,xft:Symbola
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=12:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
+!URxvt*font:               xft:Source Code Pro:pixelsize=14
+URxvt*font:               xft:Source Code Pro:pixelsize=14,xft:PowerlineSymbols:pixelsize=11:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
 URxvt*title:              terminal
 URxvt*saveLines:          1000
 URxvt*internalBorder:     3
+URxvt*transparent: false
+
+!URxvt*background:              S_base03
 
 ! xcalc
 xcalc*geometry: 200x275

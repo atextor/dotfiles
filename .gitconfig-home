@@ -4,11 +4,9 @@
 	co = checkout
 	br = branch
 [user]
+	email = textor.andreas@googlemail.com
 	name = Andreas Textor
-	email = andreas.textor@hs-rm.de
-#[http]
-#	proxy = http://proxy.cs.hs-rm.de:8080/
-[color]
-	ui = true
 [push]
 	default = simple
+[color]
+	ui = true
