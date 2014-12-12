@@ -1,86 +1,59 @@
-!*VT100.Translations:
-!<Key>BackSpace: string(0x7F)\n\
-!<Key>Delete:  string(0x1b) string("[3~")\n\
-!<Key>Home:  string(0x1b) string("[1~")\n\
-!<Key>End:  string(0x1b) string("[4~")\n\
-!Ctrl<Key>Prior:  string(0x1b) string("[40~")\n\
-!Ctrl<Key>Next:  string(0x1b) string("[41~")
+! Solarized colors
+! Common
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
 
-!XTerm*VT100.Translations:		#override \n\
-!	s<Btn4Down>: string("0x9b") string("[64~") \n\
-!	s<Btn5Down>: string("0x9b") string("[65~") \n\
-!	<Btn4Down>: string("0x9b") string("[62~") \n\
-!	<Btn5Down>: string("0x9b") string("[63~") \n\
-!	<Btn4Up>: \n\
-!	<Btn5Up>:
+! Dark 
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
 
-XTerm*background: black
-XTerm*foreground: lightgrey
-!XTerm*font: -dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1
-!Xterm*font: lime_eu
-!Xterm*font: -misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-15
-Xterm*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
-!Xterm*faceName: courier 10 pitch:size=12:charwidth=8
-Xterm*faceSize: 14
+! Light 
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
 
-XTerm*title: xterm 
-XTerm*saveLines: 1000
+URxvt*background:              #002b36
+URxvt*foreground:              #839496
+URxvt*fadeColor:               #002b36
+URxvt*cursorColor:             #93a1a1
+URxvt*pointerColorBackground:  #586e75
+URxvt*pointerColorForeground:  #93a1a1
 
-XTerm.eightBitOutput: True
-XTerm*titleBar: False
-XTerm*loginShell: False
-!XTerm*scrollBar: False
-
-XTerm*color12: #41a7ea
-
-!XTerm*color0: #000000
-!XTerm*color1: #640f19
-!XTerm*color2: #63796b
-!XTerm*color3: #ad7142
-!XTerm*color4: #4f4f89
-!XTerm*color5: #b25c7c
-!XTerm*color6: #52756b
-!XTerm*color7: #adaaad
-!XTerm*color8: #525552
-!XTerm*color9: #a56163
-!XTerm*color10: #cec263
-!XTerm*color11: #73ae70
-!XTerm*color12: #36709f
-!XTerm*color13: #aa829c
-!XTerm*color14: #518989
-!XTerm*color15: #ffffef
-
-! blasse farben
-!URxvt*color0 : #000000
-!URxvt*color1 : #9C1829
-!URxvt*color2 : #608132
-!URxvt*color3 : #AA9943
-!URxvt*color4 : #324C80
-!URxvt*color5 : #943C5A
-!URxvt*color6 : #42827B
-!URxvt*color7 : #BFBFBF
-!URxvt*color8 : #555555
-!URxvt*color9 : #CE6173
-!URxvt*color10: #AEDE6C
-!URxvt*color11: #FFF794
-!URxvt*color12: #4286BD
-!URxvt*color13: #CE9EBD
-!URxvt*color14: #4BCFCF
-!URxvt*color15: #FFFFFF
-
-!## Aterm
-!Aterm*shading: 99 
-Aterm*shading: 30 
-Aterm*transparent: True
-Aterm*scrollBar_right: True
-!aterm*eightBitInput: true
-!aterm*metaSendsEscape: false
-!Aterm*tinting: lightred
-
-URxvt.urgentOnBell: true
-
+URxvt*color0:                  #073642
+URxvt*color1:                  #dc322f
+URxvt*color2:                  #859900
+URxvt*color3:                  #b58900
+URxvt*color4:                  #268bd2
+URxvt*color5:                  #d33682
+URxvt*color6:                  #2aa198
+URxvt*color7:                  #eee8d5
+URxvt*color9:                  #cb4b16
+URxvt*color8:                  #002b36
+URxvt*color10:                 #586e75
+URxvt*color11:                 #657b83
+URxvt*color12:                 #839496
+URxvt*color13:                 #6c71c4
+URxvt*color14:                 #93a1a1
+URxvt*color15:                 #fdf6e3
+URxvt.urgentOnBell: true 
 URxvt*perl-lib: /usr/lib/urxvt
-!URxvt*perl-ext-common: matcher,searchable-scrollback,automove-background,selection-pastebin,selection-popup
 URxvt*perl-ext-common: matcher,searchable-scrollback,selection-pastebin,selection-popup,selection,mark-yank-urls
 URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
 URxvt.perl-ext: selection,mark-yank-urls
@@ -88,12 +61,12 @@ URxvt.underlineURLs: true
 
 ! oben zufuegen: tabbed
 URxvt*urlLauncher: /usr/bin/opera
-URxvt.tabbed.tabbar-fg: 3
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg:    0
-URxvt.tabbed.tab-bg:    1
-URxvt*termName:           rxvt
-URxvt*geometry:           179x51
+!URxvt.tabbed.tabbar-fg: 3
+!URxvt.tabbed.tabbar-bg: 0
+!URxvt.tabbed.tab-fg:    0
+!URxvt.tabbed.tab-bg:    1
+URxvt*termName:           rxvt-unicode-256color
+!URxvt*geometry:           179x51
 !URxvt*reverseVideo:       false
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
@@ -101,17 +74,18 @@ URxvt*jumpScroll:         true
 URxvt*scrollstyle:        plain
 URxvt*scrollBar:          false
 URxvt*scrollBar_right:    true
+URxvt*transparent:        false
 !URxvt*scrollBar_floating: boolean
 !URxvt*scrollBar_align:    mode
 !URxvt*thickness:          number
 !URxvt*scrollTtyOutput:    boolean
 !URxvt*scrollTtyKeypress:  boolean
 !URxvt*scrollWithBuffer:   boolean
-URxvt*inheritPixmap:      true
-URxvt*tintColor:          grey
+!URxvt*inheritPixmap:      true
+!URxvt*tintColor:          grey
 !URxvt*fading:             %
 !URxvt*fadeColor:          color
-URxvt*shading:            20
+!URxvt*shading:            0
 !URxvt*utmpInhibit:        boolean
 !URxvt*visualBell:         boolean
 !URxvt*mapAlert:           boolean
@@ -122,43 +96,13 @@ URxvt*shading:            20
 !URxvt*cursorUnderline:    boolean
 !URxvt*cursorBlink:        boolean
 !URxvt*pointerBlank:       boolean
-URxvt*background:         black
-URxvt*foreground:         lightgrey
-!URxvt*color0:             color
-!URxvt*color1:             color
-!URxvt*color2:             color
-!URxvt*color3:             color
-!URxvt*color4:             color
-!URxvt*color5:             color
-!URxvt*color6:             color
-!URxvt*color7:             color
-!URxvt*color8:             color
-!URxvt*color9:             color
-!URxvt*color10:            color
-!URxvt*color11:            color
-URxvt*color12:            #41a7ea
-!URxvt*color13:            color
-!URxvt*color14:            color
-!URxvt*color15:            color
-!URxvt*colorBD:            color
-!URxvt*colorIT:            color
-!URxvt*colorUL:            color
-!URxvt*colorRV:            color
-!URxvt*underlineColor:     color
-!URxvt*scrollColor:        color
-!URxvt*troughColor:        color
-!URxvt*cursorColor:        color
-!URxvt*cursorColor2:       color
-!URxvt*pointerColor:       color
-!URxvt*pointerColor2:      color
-!URxvt*borderColor:        color
+!URxvt*background:         black
+!URxvt*foreground:         lightgrey
 !URxvt*path:               search path
 !URxvt*backgroundPixmap:   file[;geom]
 !URxvt*font:                xft:Bitstream Vera Sans Mono:pixelsize=15
 !URxvt*font:                xft:Arial:pixelsize=15
 URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:CODE2000
-!URxvt*font:               -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1
-!URxvt*boldFont:           -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1
 !URxvt*italicFont:         fontname
 !URxvt*boldItalicFont:     fontname
 !URxvt*intensityStyles:    boolean
@@ -166,9 +110,9 @@ URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:COD
 !URxvt*preeditType:        style
 !URxvt*imLocale:           string
 !URxvt*imFont:             fontname
-URxvt*title:              xterm
+!URxvt*title:              xterm
 !URxvt*iconName:           string
-URxvt*saveLines:          500
+URxvt*saveLines:          1000
 !URxvt*depth:              number
 !URxvt*transient-for:      windowid
 !URxvt*override-redirect:  boolean
@@ -249,7 +193,4 @@ XLock.info: Enter password to unlock!
 
 !### Size of X Cursors
 Xcursor.size: 32
-
-dzen2.font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
-dzen2.foreground: #22EE11
-dzen2.background: black
+Xcursor.theme: pArch-24

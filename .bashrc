@@ -390,8 +390,12 @@ export FH2="textor@login2.cs.hs-rm.de"
 umask 022           # default file permissions not to be set (octal)
 #mesg y              # enable any messages users may send you with `write`
 #ulimit -u 200000       # max. user processes
-setterm -blength 0  # no beeps on console
-setterm -blank 0    # don't blank console
+
+if [ $TERM = "linux" ]; then
+	setterm -blength 0  # no beeps on console
+	setterm -blank 0    # don't blank console
+fi
+
 set -o notify       # notify when bg job done
 set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
