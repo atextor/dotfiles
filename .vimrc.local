@@ -3,8 +3,8 @@
 " then mv this vimrc to ~/.vimrc.local
 
 " Navigation mappings
-map <C-j> <ESC>30j<CR>
-map <C-k> <ESC>30k<CR>
+map <C-j> <ESC>30j
+map <C-k> <ESC>30k
 map <C-h> :bp<CR>
 map <C-l> :bn<CR>
 
@@ -14,7 +14,7 @@ map <C-w> :bdelete<CR>
 " So now, we need another binding for switching windows, normally <C-w>w.
 " Let's use <C-q> for this, since this is only an alias for Visual Block selection.
 " Visual Block Selection is available using <C-v> anyways - unless on a Windows system.
-map <C-q> :wincmd w<CR> 
+map <C-q> :wincmd w<CR>
 
 " Fugitive bind to stage
 map ,ga :Gwrite<CR>
@@ -28,7 +28,7 @@ cmap    ,rcm  :%s/\r//g<CR>"
 
 set nohlsearch  " don't highlight search results
 set nofoldenable    "dont' autofold code
-"set listchars=tab:.\ ,trail:\•,extends:#
+"set listchars=tab:‧\ ,trail:\•,extends:#
 set scrolloff=10             " vim will already start scrolling when n lines from bottom
 set scrolljump=0
 set mouse=c
@@ -57,6 +57,7 @@ if &term == "screen" || &term == "screen-256color"
   set t_ts=]2;
   set t_fs=
   set title
+  set titleold="Terminal"
 endif
 
 " Disable autocompletion while I type
@@ -64,8 +65,9 @@ let g:neocomplcache_disable_auto_complete=1
 
 " Settings for plugin minibufexpl.vim. To install plugin in spf13/vundle: :PluginSearch minibufexpl
 " Put MiniBufExpl to the bottom
-let g:miniBufExplBRSplit=1
-let g:miniBufExplStatusLineText=""
+"Plugin 'minibufexpl.vim'
+"let g:miniBufExplBRSplit=1
+"let g:miniBufExplStatusLineText=""
 
 " LaTeX
 " In order to use the LaTeX mappings, you need to have the following script as `xdvi-remote.sh'
@@ -95,8 +97,31 @@ augroup END
 
 " Gvim settings
 if has('gui_running')
-  set guifont=Source\ Code\ Pro\ Medium\ 11
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
   set vb t_vb=
   set nospell
 endif
+
+" Configure airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Get correct powerline symbols in airline in vim in urxvt
+" Prerequisites:
+" - Installed patched powerline fonts from https://github.com/powerline/fonts
+" - Configure font, put the following in ~/.Xresources: URxvt*font: xft:Source Code Pro for Powerline:pixelsize=14
+"   (and run xrdb -merge ~/.Xresources)
+" - These commands are copied from the airline help, :help airline, then /unicode symbols
+
+" You need to define a dictionary first
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols = {}
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 

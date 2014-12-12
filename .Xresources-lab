@@ -100,7 +100,8 @@ URxvt*scrollBar_right:    true
 !URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,PowerlineSymbols:pixelsize=12,xft:CODE2000,xft:Symbola
 !URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=12:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
 !URxvt*font:               xft:Source Code Pro:pixelsize=14
-URxvt*font:               xft:Source Code Pro:pixelsize=14,xft:PowerlineSymbols:pixelsize=11:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
+!URxvt*font:               xft:Source Code Pro:pixelsize=13,xft:PowerlineSymbols:pixelsize=11:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
+URxvt*font:               xft:Source Code Pro for Powerline:pixelsize=14,xft:CODE2000,xft:Symbola
 URxvt*title:              terminal
 URxvt*saveLines:          1000
 URxvt*internalBorder:     3
