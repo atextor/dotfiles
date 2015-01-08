@@ -65,14 +65,14 @@ function whereami() {
 	if [ $system = "SunOS" ]; then echo "sun"; exit; fi
 	if [ $HOSTNAME = "tengu" ]; then echo "home"; exit; fi
 	if [ $HOSTNAME = "mastodon" ]; then echo "laptop"; exit; fi
-	if [ ${HOSTNAME:0:2} = "vs" ]; then echo "lab"; exit; fi 
-	if [ ${HOSTNAME:0:2} = "lx" ] || [ $HOSTNAME = "fozzie" ] || [ $HOSTNAME = "gonzo" ]; then echo "hsrm"; fi
+	if [ ${HOSTNAME:0:2} = "vs" ]; then echo "lab"; exit; fi
+	if [ ${HOSTNAME:0:2} = "lx" ] || [ $HOSTNAME = "scooter" ] || [ $HOSTNAME = "gonzo" ]; then echo "hsrm"; fi
 }
 
 # Function to run upon exit of shell.
 function _exit() {
 	clear
-	echo -e "${NONE}Logged out at `date`"
+	echo -e "${NONE}Logged out at `date`" | sed -e 's/\\\[//g' -e 's/\\\]//g'
 }
 
 # Asks a y/n question. Usage: if ask "something"; then ... ; fi
@@ -151,7 +151,7 @@ __prompt_vcs() {
 				M|A|D|R) staged=1;;
 				'?') untracked=1;;
 			esac
-			case "${line:1:1}" in 
+			case "${line:1:1}" in
 				M|D) unstaged=1;;
 			esac
 		done <<< "$(git status --porcelain 2> /dev/null)"
@@ -195,7 +195,7 @@ __prompt_vcs() {
 		[ $untracked -eq 1 ] && stat+="$color_alert$vcs_status_indicator$NONE"
 		return 0
 	}
-	
+
 	git_dir || svn_dir || return
 	echo -e "${NONE}[${WHITE}${vcs}${NONE}${color_additional}|${GREEN}${ref}${stat}${additional}${NONE}]"
 }
@@ -300,7 +300,7 @@ alias redshift='redshift -l 50.0856:8.2387'
 complete -d cd
 enable_completion_commands="git"
 for cmd in $enable_completion_commands; do
-	[ -f /etc/bash_completion.d/$cmd ] && source /etc/bash_completion.d/$cmd 
+	[ -f /etc/bash_completion.d/$cmd ] && source /etc/bash_completion.d/$cmd
 done
 
 #---------------------------------------------------------------------
@@ -378,6 +378,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export RI="--format ansi -T"
 export SBT_OPTS=-Xmx512M
 #[ "$TERM" = "screen.rxvt" ] && export TERM="screen"
+# According to `man 1 gpg-agent':
+export GPG_TTY=`tty`
 
 # Misc convenience vars vars
 export FH="textor@login1.cs.hs-rm.de"
@@ -557,7 +559,7 @@ function vlcc() {
 	play|pause)
 		curl -g "$baseurl/status.xml?command=pl_pause" &>/dev/null ;;
 	stop)
-		curl -g "$baseurl/status.xml?command=pl_stop" &>/dev/null ;; 
+		curl -g "$baseurl/status.xml?command=pl_stop" &>/dev/null ;;
 	empty)
 		curl -g "$baseurl/status.xml?command=pl_empty" &>/dev/null ;;
 	add)
@@ -775,8 +777,8 @@ function leo {
 		echo "Usage: leo <word>"
 	else
 		require curl && require html2text && {
-			curl "http://dict.leo.org/ende?lp=ende&lang=en&searchLoc=0&cmpType=relaxed&sectHdr=on&spellToler=&search=$1" 2>/dev/null | 
-			/bin/grep 'search results' | html2text -style pretty | sed -e 's/|//g' -e 's/\xBA/o/g' -e 's/.\x08//g' | tail -n +12 | head -n -40 
+			curl "http://dict.leo.org/ende?lp=ende&lang=en&searchLoc=0&cmpType=relaxed&sectHdr=on&spellToler=&search=$1" 2>/dev/null |
+			/bin/grep 'search results' | html2text -style pretty | sed -e 's/|//g' -e 's/\xBA/o/g' -e 's/.\x08//g' | tail -n +12 | head -n -40
 		}
 	fi
 }
