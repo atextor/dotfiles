@@ -292,6 +292,9 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias redshift='redshift -l 50.0856:8.2387'
 
+# load vstags if available (https://github.com/atextor/vstags)
+[ -e ~/git/vstags/vstags.sh ] && . ~/git/vstags/vstags.sh
+
 #---------------------------------------------------------------------
 # Bash completion
 #---------------------------------------------------------------------
