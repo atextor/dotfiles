@@ -301,9 +301,9 @@ alias redshift='redshift -l 50.0856:8.2387'
 
 # Only enable programmable bash completion for certain commands
 complete -d cd
-enable_completion_commands="git"
+enable_completion_commands="git nmcli pacman"
 for cmd in $enable_completion_commands; do
-	[ -f /etc/bash_completion.d/$cmd ] && source /etc/bash_completion.d/$cmd
+	[ -f /usr/share/bash-completion/completions/$cmd ] && source /usr/share/bash-completion/completions/$cmd
 done
 
 #---------------------------------------------------------------------
