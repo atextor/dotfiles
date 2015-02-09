@@ -883,3 +883,7 @@ function screen_remote() {
 	screen -p $2 -X stuff $'\n'
 }
 
+# Quick way to change the terminal emulator title
+function set_title() {
+	echo -ne "\033]0;$1\007"
+}
