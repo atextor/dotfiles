@@ -18,7 +18,7 @@ defutf8 on
 #termcapinfo rxvt ti@:te@
 hardstatus alwayslastline "  %{= kw}%?%-Lw%?%{= bw}%n*%f %t%?(%u)%?%{= kw}%?%+Lw%? %=%{wk} %d.%m.%Y %{yk} %0c "
 
-term screen-256color
+#term screen-256color
 terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 bind q select 10
