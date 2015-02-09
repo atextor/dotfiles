@@ -475,6 +475,9 @@ lab)
 	alias lf='padsp rdesktop -g 3200x980 -f -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
 	alias lfsl='padsp rdesktop -g 1910x1136 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
 	alias lfsr='padsp rdesktop -g 1270x960 -z -x 0x80 -r disk:foo=/users/a_textor -r sound:local:oss -u a_textor -d vs luegfix'
+	alias lfword='zenity --password | rdesktop -z -x 0x80 -A "%ProgramFiles%\ThinLinc\WTSTools\seamlessrdpshell.exe" -s "C:\Programme\Microsoft Office\Office14\WINWORD.EXE" -u a_textor -p - -d vs luegfix.vs.cs.hs-rm.de'
+	alias lfexcel='zenity --password | rdesktop -z -x 0x80 -A "%ProgramFiles%\ThinLinc\WTSTools\seamlessrdpshell.exe" -s "C:\Programme\Microsoft Office\Office14\EXCEL.EXE" -u a_textor -p - -d vs luegfix.vs.cs.hs-rm.de'
+	alias lfpowerpoint='zenity --password | rdesktop -z -x 0x80 -A "%ProgramFiles%\ThinLinc\WTSTools\seamlessrdpshell.exe" -s "C:\Programme\Microsoft Office\Office14\POWERPNT.EXE" -u a_textor -p - -d vs luegfix.vs.cs.hs-rm.de'
 
 	proxyHost="proxy.cs.hs-rm.de"
 	proxyPort=8080
