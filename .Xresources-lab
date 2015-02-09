@@ -68,8 +68,9 @@ URxvt*color15:                 #fdf6e3
 !XTerm*color12: #41a7ea
 
 ! Xterm/Urxvt
-!XTerm*background: black
-!XTerm*foreground: lightgrey
+XTerm*background: black
+XTerm*foreground: lightgrey
+XTerm*faceName:   Source Code Pro for Powerline:pixelsize=14
 !XTerm*saveLines: 1000
 !XTerm*titleBar: False
 !XTerm*loginShell: True
