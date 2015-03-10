@@ -29,6 +29,7 @@ cmap    ,rcm  :%s/\r//g<CR>"
 set nohlsearch  " don't highlight search results
 set nofoldenable    "dont' autofold code
 "set listchars=tab:‧\ ,trail:\•,extends:#
+set listchars=tab:›\ ,extends:#,nbsp:. " Highlight problematic whitespace
 set scrolloff=10             " vim will already start scrolling when n lines from bottom
 set scrolljump=0
 set mouse=c
@@ -129,4 +130,11 @@ let g:airline_symbols.linenr = ''
 
 " Configure vim-indent
 let g:indent_guides_enable_on_vim_startup = 0
+
+" Configure syntastic
+let g:syntastic_mode_map = {
+   \ "mode": "active",
+   \ "active_filetypes": [],
+   \ "passive_filetypes": ["tex"] }
+
 
