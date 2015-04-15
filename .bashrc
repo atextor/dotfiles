@@ -339,6 +339,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 [ -d /usr/local/bin ] && PATH="/usr/local/bin:$PATH"
 #[ ! `echo $PATH|grep acoc` ] && [ -e /usr/local/acoc/bin ] && PATH="/usr/local/acoc/bin:$PATH"
 [ -d $HOME/bin ] && PATH="$HOME/bin:$PATH"
+[ -d $HOME/.gem/ruby/2.2.0/bin ] && PATH="$HOME/.gem/ruby/2.2.0/bin:$PATH"
 export PATH
 
 # Manpath
