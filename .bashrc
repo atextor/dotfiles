@@ -658,7 +658,7 @@ function cd() {
 		fi
 	else
 	# Were are in a normal directory
-		if file -i "$1" | grep "application/zip" 2>&1 &>/dev/null; then
+		if file -i "$1" | grep "application/zip|application/jar|application/java-archive" 2>&1 &>/dev/null; then
 			if ! which fuse-zip 2>&1 &>/dev/null; then
 				echo "Install fuse-zip to enable cd'able archives."
 				builtin cd "$@"
