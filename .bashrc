@@ -888,3 +888,10 @@ function screen_remote() {
 function set_title() {
 	echo -ne "\033]0;$1\007"
 }
+
+# Run a command offline, i.e., hide network access from the process.
+# Usage example: offline steam
+function offline() {
+	require unshare && sudo unshare -n -- sh -c "ifconfig lo up; sudo -u $USER $*"
+}
+
