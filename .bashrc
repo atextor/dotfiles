@@ -500,12 +500,7 @@ lab)
 	export PEGASUS_HOME=$HOME/thesis/pegasus
 	export PEGASUS_PLATFORM=LINUX_IX86_GNU
 
-	export M2_HOME=/opt/java/maven-3.0.3
-	export MAVEN_HOME=$M2_HOME
-	export M2=$M2_HOME/bin
-
 	export PATH=$JAVA_HOME/bin:$PATH
-	export PATH=$M2:$PATH
 	export PATH=$PATH:/opt/tools/AdobeReader/Adobe/Reader9/bin
 	export PATH=$PATH:~/bin/scala/bin
 	;;
