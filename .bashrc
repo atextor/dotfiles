@@ -890,3 +890,6 @@ function offline() {
 	require unshare && sudo unshare -n -- sh -c "ifconfig lo up; sudo -u $USER $*"
 }
 
+function tagesschau() {
+	require mplayer && require linkextor && mplayer "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webm.webm$')"
+}
