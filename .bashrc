@@ -289,7 +289,6 @@ alias chomp="tr -d $'\n'"
 alias acroread='acroread 2>/dev/null'
 alias evince='evince 2>/dev/null'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias redshift='redshift -l 50.0856:8.2387'
 
 # load vstags if available (https://github.com/atextor/vstags)
@@ -891,5 +890,9 @@ function offline() {
 }
 
 function tagesschau() {
-	require mplayer && require linkextor && mplayer "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webm.webm$')"
+	require mplayer && require linkextor && mplayer -cache 60000 -cache-min 5 "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webl.webm$')"
+}
+
+function servethis() {
+	python -m http.server || python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
 }
