@@ -290,6 +290,7 @@ alias acroread='acroread 2>/dev/null'
 alias evince='evince 2>/dev/null'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias redshift='redshift -l 50.0856:8.2387'
+alias rdf2dot='rapper -o dot'
 
 # load vstags if available (https://github.com/atextor/vstags)
 [ -e ~/git/vstags/vstags.sh ] && . ~/git/vstags/vstags.sh
@@ -339,6 +340,8 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 #[ ! `echo $PATH|grep acoc` ] && [ -e /usr/local/acoc/bin ] && PATH="/usr/local/acoc/bin:$PATH"
 [ -d $HOME/bin ] && PATH="$HOME/bin:$PATH"
 [ -d $HOME/.gem/ruby/2.2.0/bin ] && PATH="$HOME/.gem/ruby/2.2.0/bin:$PATH"
+[ -d $HOME/git/gocode/bin ] && PATH="$HOME/git/gocode/bin:$PATH"
+[ -d $HOME/git/data-science-at-the-command-line/tools ] && PATH="$HOME/git/data-science-at-the-command-line/tools:$PATH"
 export PATH
 
 # Manpath
@@ -484,21 +487,26 @@ lab)
 	socksHost="socks.cs.hs-rm.de"
 	socksPort=1080
 	noProxy="wwwprod.vs.cs.hs-rm.de,localhost,www-intern.cs.hs-rm.de"
-	export http_proxy="http://${proxyHost}:${proxyPort}"
-	export https_proxy="http://${proxyHost}:${proxyPort}"
-	export ftp_proxy="http://${proxyHost}:${proxyPort}"
-	export socks_proxy="http://${socksHost}:${socksPort}"
-	export no_proxy="$noProxy"
+#	export http_proxy="http://${proxyHost}:${proxyPort}"
+#	export https_proxy="http://${proxyHost}:${proxyPort}"
+#	export ftp_proxy="http://${proxyHost}:${proxyPort}"
+#	export socks_proxy="http://${socksHost}:${socksPort}"
+#	export no_proxy="$noProxy"
+	unset http_proxy
+	unset https_proxy
+	unset ftp_proxy
+	unset socks_proxy
 
 	export JAVA_HOME=/opt/jdk/jdk1.8
 	export ANT_HOME=/opt/java/ant
 	javaNoProxy="$(echo $noProxy | tr , '|')"
-	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
+#	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
 
 	export PEGASUS_ROOT=$HOME/thesis/pegasus
 	export PEGASUS_HOME=$HOME/thesis/pegasus
 	export PEGASUS_PLATFORM=LINUX_IX86_GNU
 
+	export PATH=$ANT_HOME/bin:$PATH
 	export PATH=$JAVA_HOME/bin:$PATH
 	export PATH=$PATH:/opt/tools/AdobeReader/Adobe/Reader9/bin
 	export PATH=$PATH:~/bin/scala/bin
@@ -506,10 +514,14 @@ lab)
 hsrm)
 	alias wget='wget -Y on'	# to use the proxy
 
-	export http_proxy="http://proxy.cs.hs-rm.de:8080"
-	export https_proxy="http://proxy.cs.hs-rm.de:8080"
-	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
-	export socks_proxy="http://socks.cs.hs-rm.de:1080"
+	unset http_proxy
+	unset https_proxy
+	unset ftp_proxy
+	unset socks_proxy
+#	export http_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export https_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export socks_proxy="http://socks.cs.hs-rm.de:1080"
 	;;
 hpux)
 	export JAVA_HOME="/opt/java1.4"
@@ -889,6 +901,8 @@ function offline() {
 	require unshare && sudo unshare -n -- sh -c "ifconfig lo up; sudo -u $USER $*"
 }
 
+# Play the last 20:00 o'clock episode of german news programme tagesschau.
+# Requires the linkextor script from http://plasmasturm.org/code/linkextor/linkextor
 function tagesschau() {
 	require mplayer && require linkextor && mplayer -cache 60000 -cache-min 5 "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webl.webm$')"
 }
@@ -896,3 +910,4 @@ function tagesschau() {
 function servethis() {
 	python -m http.server || python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
 }
+
