@@ -66,12 +66,6 @@ endif
 " Disable autocompletion while I type
 let g:neocomplcache_disable_auto_complete=1
 
-" Settings for plugin minibufexpl.vim. To install plugin in spf13/vundle: :PluginSearch minibufexpl
-" Put MiniBufExpl to the bottom
-"Plugin 'minibufexpl.vim'
-"let g:miniBufExplBRSplit=1
-"let g:miniBufExplStatusLineText=""
-
 " LaTeX
 " In order to use the LaTeX mappings, you need to have the following script as `xdvi-remote.sh'
 " in your path which in turn requires xsendkey (http://people.csail.mit.edu/adonovan/hacks/xsendkey.html):

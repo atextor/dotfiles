@@ -290,8 +290,8 @@ alias chomp="tr -d $'\n'"
 alias acroread='acroread 2>/dev/null'
 alias evince='evince 2>/dev/null'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias redshift='redshift -l 50.0856:8.2387'
+alias rdf2dot='rapper -o dot'
 
 # load vstags if available (https://github.com/atextor/vstags)
 [ -e ~/git/vstags/vstags.sh ] && . ~/git/vstags/vstags.sh
@@ -341,6 +341,8 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 #[ ! `echo $PATH|grep acoc` ] && [ -e /usr/local/acoc/bin ] && PATH="/usr/local/acoc/bin:$PATH"
 [ -d $HOME/bin ] && PATH="$HOME/bin:$PATH"
 [ -d $HOME/.gem/ruby/2.2.0/bin ] && PATH="$HOME/.gem/ruby/2.2.0/bin:$PATH"
+[ -d $HOME/git/gocode/bin ] && PATH="$HOME/git/gocode/bin:$PATH"
+[ -d $HOME/git/data-science-at-the-command-line/tools ] && PATH="$HOME/git/data-science-at-the-command-line/tools:$PATH"
 [ -d $HOME/.rvm/bin ] && PATH="$HOME/.rvm/bin:$PATH"
 [ -d $HOME/.rvm/rubies/default/bin ] && PATH="$HOME/.rvm/rubies/default/bin:$PATH"
 export PATH
@@ -491,37 +493,41 @@ lab)
 	socksHost="socks.cs.hs-rm.de"
 	socksPort=1080
 	noProxy="wwwprod.vs.cs.hs-rm.de,localhost,www-intern.cs.hs-rm.de"
-	export http_proxy="http://${proxyHost}:${proxyPort}"
-	export https_proxy="http://${proxyHost}:${proxyPort}"
-	export ftp_proxy="http://${proxyHost}:${proxyPort}"
-	export socks_proxy="http://${socksHost}:${socksPort}"
-	export no_proxy="$noProxy"
+#	export http_proxy="http://${proxyHost}:${proxyPort}"
+#	export https_proxy="http://${proxyHost}:${proxyPort}"
+#	export ftp_proxy="http://${proxyHost}:${proxyPort}"
+#	export socks_proxy="http://${socksHost}:${socksPort}"
+#	export no_proxy="$noProxy"
+	unset http_proxy
+	unset https_proxy
+	unset ftp_proxy
+	unset socks_proxy
 
 	export JAVA_HOME=/opt/jdk/jdk1.8
 	export ANT_HOME=/opt/java/ant
 	javaNoProxy="$(echo $noProxy | tr , '|')"
-	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
+#	export ANT_OPTS="-Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort} -Dftp.proxyHost=${proxyHost} -Dftp.proxyPort=${proxyPort}"
 
 	export PEGASUS_ROOT=$HOME/thesis/pegasus
 	export PEGASUS_HOME=$HOME/thesis/pegasus
 	export PEGASUS_PLATFORM=LINUX_IX86_GNU
 
-	export M2_HOME=/opt/java/maven-3.0.3
-	export MAVEN_HOME=$M2_HOME
-	export M2=$M2_HOME/bin
-
+	export PATH=$ANT_HOME/bin:$PATH
 	export PATH=$JAVA_HOME/bin:$PATH
-	export PATH=$M2:$PATH
 	export PATH=$PATH:/opt/tools/AdobeReader/Adobe/Reader9/bin
 	export PATH=$PATH:~/bin/scala/bin
 	;;
 hsrm)
 	alias wget='wget -Y on'	# to use the proxy
 
-	export http_proxy="http://proxy.cs.hs-rm.de:8080"
-	export https_proxy="http://proxy.cs.hs-rm.de:8080"
-	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
-	export socks_proxy="http://socks.cs.hs-rm.de:1080"
+	unset http_proxy
+	unset https_proxy
+	unset ftp_proxy
+	unset socks_proxy
+#	export http_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export https_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
+#	export socks_proxy="http://socks.cs.hs-rm.de:1080"
 	;;
 hpux)
 	export JAVA_HOME="/opt/java1.4"
@@ -665,7 +671,7 @@ function cd() {
 		fi
 	else
 	# Were are in a normal directory
-		if file -i "$1" | grep "application/zip" 2>&1 &>/dev/null; then
+		if file -i "$1" | grep "application/zip|application/jar|application/java-archive" 2>&1 &>/dev/null; then
 			if ! which fuse-zip 2>&1 &>/dev/null; then
 				echo "Install fuse-zip to enable cd'able archives."
 				builtin cd "$@"
@@ -894,3 +900,20 @@ function screen_remote() {
 function set_title() {
 	echo -ne "\033]0;$1\007"
 }
+
+# Run a command offline, i.e., hide network access from the process.
+# Usage example: offline steam
+function offline() {
+	require unshare && sudo unshare -n -- sh -c "ifconfig lo up; sudo -u $USER $*"
+}
+
+# Play the last 20:00 o'clock episode of german news programme tagesschau.
+# Requires the linkextor script from http://plasmasturm.org/code/linkextor/linkextor
+function tagesschau() {
+	require mplayer && require linkextor && mplayer -cache 60000 -cache-min 5 "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webl.webm$')"
+}
+
+function servethis() {
+	python -m http.server || python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
+}
+
