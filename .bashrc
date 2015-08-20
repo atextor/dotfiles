@@ -65,6 +65,7 @@ function whereami() {
 	if [ $system = "SunOS" ]; then echo "sun"; exit; fi
 	if [ $HOSTNAME = "tengu" ]; then echo "home"; exit; fi
 	if [ $HOSTNAME = "mastodon" ]; then echo "laptop"; exit; fi
+	if [ $HOSTNAME = "warg" ]; then echo "raspi"; exit; fi
 	if [ ${HOSTNAME:0:2} = "vs" ]; then echo "lab"; exit; fi
 	if [ ${HOSTNAME:0:2} = "lx" ] || [ $HOSTNAME = "scooter" ] || [ $HOSTNAME = "gonzo" ]; then echo "hsrm"; fi
 }
@@ -454,6 +455,9 @@ laptop)
 	alias rn='rename.pl'
 	alias fixresoluton='xrandr -s 1440x900'
 	export PATH=$JAVA_HOME/bin:$PATH
+	;;
+raspi)
+	alias rn='rename.pl'
 	;;
 lab)
 	alias wget='wget -Y on' # to use the proxy
