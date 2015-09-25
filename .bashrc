@@ -913,7 +913,14 @@ function tagesschau() {
 	require mplayer && require linkextor && mplayer -cache 60000 -cache-min 5 "$(linkextor 'http://www.tagesschau.de/sendung/tagesschau/index.html' | /bin/grep '.webl.webm$')"
 }
 
+# Export current directory via HTTP
 function servethis() {
 	python -m http.server || python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'
+}
+
+# Run a command and make it think it has interactive stdin and stdout, as opposed to a pipe.
+# This is useful whenever you don't want a command to behave differently when piping in or out of it
+function faketty() {
+	script -eqfc "$(printf "%q " "$@")";
 }
 
