@@ -64,7 +64,7 @@ function whereami() {
 	if [ $system = "HP-UX" ]; then echo "hpux"; exit; fi
 	if [ $system = "SunOS" ]; then echo "sun"; exit; fi
 	if [ $HOSTNAME = "tengu" ]; then echo "home"; exit; fi
-	if [ $HOSTNAME = "mastodon" ]; then echo "laptop"; exit; fi
+	if [ $HOSTNAME = "pyrolisk" ]; then echo "laptop"; exit; fi
 	if [ $HOSTNAME = "warg" ]; then echo "raspi"; exit; fi
 	if [ ${HOSTNAME:0:2} = "vs" ]; then echo "lab"; exit; fi
 	if [ ${HOSTNAME:0:2} = "lx" ] || [ $HOSTNAME = "scooter" ] || [ $HOSTNAME = "gonzo" ]; then echo "hsrm"; fi
@@ -456,8 +456,8 @@ home)
 	;;
 laptop)
 	alias wget='wget -c --tries=235'
-	alias rn='rename.pl'
-	alias fixresoluton='xrandr -s 1440x900'
+	alias rn='rename'
+	alias fixresoluton='xrandr -s 1600x900'
 	export PATH=$JAVA_HOME/bin:$PATH
 	;;
 raspi)
