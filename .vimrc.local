@@ -65,6 +65,7 @@ endif
 
 " Disable autocompletion while I type
 let g:neocomplcache_disable_auto_complete=1
+let neocomplete#disable_auto_complete=1
 
 " LaTeX
 " In order to use the LaTeX mappings, you need to have the following script as `xdvi-remote.sh'
