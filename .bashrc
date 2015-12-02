@@ -924,3 +924,7 @@ function faketty() {
 	script -eqfc "$(printf "%q " "$@")";
 }
 
+function rand() {
+	files=(*)
+	printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
+}
