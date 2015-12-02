@@ -3,24 +3,24 @@
 # Author: Andreas Textor <textor.andreas@googlemail.com>
 
 # ANSI Colors
-export NONE="$(tput sgr0)"
-export BLACK="$(tput setaf 0)"
-export RED="$(tput setaf 1)"
-export GREEN="$(tput setaf 2)"
-export BROWN="$(tput setaf 3)"
-export BLUE="$(tput setaf 4)"
-export PURPLE="$(tput setaf 5)"
-export CYAN="$(tput setaf 6)"
-export LIGHTGRAY="$(tput setaf 7)"
+export NONE='\e[0m'
+export BLACK='\e[0;30m'
+export RED='\e[0;31m'
+export GREEN='\e[0;32m'
+export BROWN='\e[0;33m'
+export BLUE='\e[0;34m'
+export PURPLE='\e[0;35m'
+export CYAN='\e[0;36m'
+export LIGHTGRAY='\e[0;37m'
 
-export DARKGRAY="$(tput bold)${BLACK}"
-export LIGHTRED="$(tput bold)${RED}"
-export LIGHTGREEN="$(tput bold)${GREEN}"
-export YELLOW="$(tput bold)${BROWN}"
-export LIGHTBLUE="$(tput bold)${BLUE}"
-export LIGHTPURPLE="$(tput bold)${PURPLE}"
-export LIGHTCYAN="$(tput bold)${CYAN}"
-export WHITE="$(tput bold)${LIGHTGRAY}"
+export DARKGRAY='\e[1;30m'
+export LIGHTRED='\e[1;31m'
+export LIGHTGREEN='\e[1;32m'
+export YELLOW='\e[1;33m'
+export LIGHTBLUE='\e[1;34m'
+export LIGHTPURPLE='\e[1;35m'
+export LIGHTCYAN='\e[1;36m'
+export WHITE='\e[1;37m'
 
 # Colors used in prompt and other places
 color_dir="$BROWN"
@@ -72,7 +72,9 @@ function whereami() {
 
 # Function to run upon exit of shell.
 function _exit() {
-	clear
+	if [ ! -z "$TERM" ]; then
+		clear
+	fi
 	echo -e "${NONE}Logged out at `date`" | sed -e 's/\\\[//g' -e 's/\\\]//g'
 }
 
@@ -264,6 +266,7 @@ require grc quiet && {
 	alias ld='grc -es --colour=auto ld'
 	alias netstat='grc -es --colour=auto netstat'
 	alias traceroute='grc -es --colour=auto traceroute'
+	alias tail='grc -es --colour=auto tail' 
 }
 
 # misc. convenience binds
@@ -350,6 +353,12 @@ export PATH
 # Manpath
 [ -d /usr/share/man ] && export MANPATH=/usr/share/man:$MANPATH
 
+# Determine if this is an interactive shell. Useful to exclude intercative-shell-only settings later.
+unset INTERACTIVE
+if [ ! -z "$PS1" ]; then
+	export INTERACTIVE=true
+fi
+
 # Prompt
 export PS1=$(prompt) # see above function
 export PS2="\[${WHITE}\]>\[${NONE}\] "
@@ -373,8 +382,10 @@ export VIM=/usr/share/vim
 export PAGER=/bin/less
 export LESS=-R
 export LESSCHARSET="utf-8"
-require most quiet && {
-	export MANPAGER=$(which most)
+
+#vim as manpager
+require vim quiet && {
+	export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 } || {
 	export MANPAGER=$(which less)
 }
@@ -411,10 +422,14 @@ set -o notify       # notify when bg job done
 set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
 #set nobeep
-stty -ixon
 
-# run function on logout
-trap _exit EXIT
+if [ $INTERACTIVE = "true" ]; then
+	# disable flow control (i.e., CTRL-S freezing the terminal)
+	stty -ixon
+
+	# run function on logout
+	trap _exit EXIT
+fi
 
 # '-s' sets option, '-u' unsets option, '-q' supresses output of option.
 shopt -s cdable_vars    # Make 'cd $VARIABLE' possible
@@ -516,6 +531,7 @@ lab)
 	export PATH=$JAVA_HOME/bin:$PATH
 	export PATH=$PATH:/opt/tools/AdobeReader/Adobe/Reader9/bin
 	export PATH=$PATH:~/bin/scala/bin
+	export PATH=$PATH:/users/a_textor/software/apache-jena-3.0.0/bin
 	;;
 hsrm)
 	alias wget='wget -Y on'	# to use the proxy
@@ -554,6 +570,9 @@ sun)
 	# setenv TERM `tset -Q -`
 	;;
 esac
+
+# Load fzf if available (https://github.com/junegunn/fzf)
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #---------------------------------------------------------------------
 # Functions for general use
@@ -790,18 +809,6 @@ function run {
 	esac
 }
 
-# command line interface to leo online translator
-function leo {
-	if [ $# -ne 1 ]; then
-		echo "Usage: leo <word>"
-	else
-		require curl && require html2text && {
-			curl "http://dict.leo.org/ende?lp=ende&lang=en&searchLoc=0&cmpType=relaxed&sectHdr=on&spellToler=&search=$1" 2>/dev/null |
-			/bin/grep 'search results' | html2text -style pretty | sed -e 's/|//g' -e 's/\xBA/o/g' -e 's/.\x08//g' | tail -n +12 | head -n -40
-		}
-	fi
-}
-
 # Display ANSI colours. Found this on the interwebs, credited
 # to "HH".
 function ansicolors() {
@@ -928,3 +935,27 @@ function rand() {
 	files=(*)
 	printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
 }
+
+# Taken from https://gist.github.com/cdown/1163649
+function urlencode() {
+	# urlencode <string>
+
+	local length="${#1}"
+	for (( i = 0; i < length; i++ )); do
+		local c="${1:i:1}"
+		case $c in
+			[a-zA-Z0-9.~_-]) printf "$c" ;;
+			*) printf '%s' "$c" | xxd -p -c1 |
+				   while read c; do printf '%%%s' "$c"; done ;;
+		esac
+	done
+}
+
+# Taken from https://gist.github.com/cdown/1163649
+function urldecode() {
+	# urldecode <string>
+
+	local url_encoded="${1//+/ }"
+	printf '%b' "${url_encoded//%/\\x}"
+}
+
