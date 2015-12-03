@@ -8,3 +8,5 @@
 	email = textor.andreas@googlemail.com
 [color]
 	ui = true
+[push]
+	default = simple
