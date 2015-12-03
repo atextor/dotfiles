@@ -1,4 +1,8 @@
-! Solarized colors
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
 ! Common
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
@@ -9,7 +13,8 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-! Dark 
+
+! Dark
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -19,7 +24,8 @@
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-! Light 
+
+! Light
 ! #define S_base03        #fdf6e3
 ! #define S_base02        #eee8d5
 ! #define S_base01        #93a1a1
@@ -29,6 +35,10 @@
 ! #define S_base2         #073642
 ! #define S_base3         #002b36
 
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+URxvt.intensityStyles:         false
 URxvt*background:              #002b36
 URxvt*foreground:              #839496
 URxvt*fadeColor:               #002b36
@@ -46,103 +56,61 @@ URxvt*color6:                  #2aa198
 URxvt*color7:                  #eee8d5
 URxvt*color9:                  #cb4b16
 URxvt*color8:                  #002b36
-URxvt*color10:                 #586e75
-URxvt*color11:                 #657b83
-URxvt*color12:                 #839496
+URxvt*color10:                 #93a1a1
+URxvt*color11:                 #839496
+URxvt*color12:                 #657b83
 URxvt*color13:                 #6c71c4
-URxvt*color14:                 #93a1a1
+URxvt*color14:                 #586e75
 URxvt*color15:                 #fdf6e3
-URxvt.urgentOnBell: true 
-!URxvt*perl-lib: /usr/lib/urxvt
-URxvt*perl-lib: /home/tex/.urxvt
 
-URxvt*perl-ext-common: matcher,searchable-scrollback,selection-pastebin,selection-popup,selection,mark-yank-urls
+! Colors
+! ANSI colors are fine, except the dark blue, which is hardly readable.
+!XTerm*color12: #41a7ea
+
+! Xterm/Urxvt
+XTerm*background: black
+XTerm*foreground: lightgrey
+XTerm*faceName:   Source Code Pro for Powerline:pixelsize=14
+!XTerm*saveLines: 1000
+!XTerm*titleBar: False
+!XTerm*loginShell: True
+!XTerm.eightBitOutput: True
+
+! Urxvt
 URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
-URxvt.perl-ext: selection,mark-yank-urls
 URxvt.underlineURLs: true
+URxvt*perl-lib: /home/tex/.urxvt/
+URxvt.perl-ext: selection,mark-yank-urls
+URxvt*urlLauncher: chromium-browser
 
-! oben zufuegen: tabbed
-URxvt*urlLauncher: /usr/bin/opera
-!URxvt.tabbed.tabbar-fg: 3
-!URxvt.tabbed.tabbar-bg: 0
-!URxvt.tabbed.tab-fg:    0
-!URxvt.tabbed.tab-bg:    1
 URxvt*termName:           rxvt-unicode-256color
-!URxvt*geometry:           179x51
-!URxvt*reverseVideo:       false
+URxvt*geometry:           159x60
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
-!URxvt*pastableTabs:       boolean
 URxvt*scrollstyle:        plain
 URxvt*scrollBar:          false
 URxvt*scrollBar_right:    true
-URxvt*transparent:        false
-!URxvt*scrollBar_floating: boolean
-!URxvt*scrollBar_align:    mode
-!URxvt*thickness:          number
-!URxvt*scrollTtyOutput:    boolean
-!URxvt*scrollTtyKeypress:  boolean
-!URxvt*scrollWithBuffer:   boolean
 !URxvt*inheritPixmap:      true
 !URxvt*tintColor:          grey
-!URxvt*fading:             %
-!URxvt*fadeColor:          color
-!URxvt*shading:            0
-!URxvt*utmpInhibit:        boolean
-!URxvt*visualBell:         boolean
-!URxvt*mapAlert:           boolean
-!URxvt*meta8:              boolean
-!URxvt*mouseWheelScrollPage:   boolean
-!URxvt*tripleclickwords:   boolean
-!URxvt*insecure:           boolean
-!URxvt*cursorUnderline:    boolean
-!URxvt*cursorBlink:        boolean
-!URxvt*pointerBlank:       boolean
+!URxvt*shading:            20
 !URxvt*background:         black
 !URxvt*foreground:         lightgrey
-!URxvt*path:               search path
-!URxvt*backgroundPixmap:   file[;geom]
-!URxvt*font:                xft:Bitstream Vera Sans Mono:pixelsize=15
-!URxvt*font:                xft:Arial:pixelsize=15
-URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:CODE2000
-!URxvt*italicFont:         fontname
-!URxvt*boldItalicFont:     fontname
-!URxvt*intensityStyles:    boolean
-!URxvt*inputMethod:        name
-!URxvt*preeditType:        style
-!URxvt*imLocale:           string
-!URxvt*imFont:             fontname
-!URxvt*title:              xterm
-!URxvt*iconName:           string
+!URxvt*color12:            #41a7ea
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11,xft:CODE2000,xft:Symbola
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,PowerlineSymbols:pixelsize=12,xft:CODE2000,xft:Symbola
+!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=12:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
+!URxvt*font:               xft:Source Code Pro:pixelsize=14
+!URxvt*font:               xft:Source Code Pro:pixelsize=13,xft:PowerlineSymbols:pixelsize=11:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
+URxvt*font:               xft:Source Code Pro for Powerline:pixelsize=14,xft:CODE2000,xft:Symbola
+URxvt*title:              terminal
 URxvt*saveLines:          1000
-!URxvt*depth:              number
-!URxvt*transient-for:      windowid
-!URxvt*override-redirect:  boolean
-!URxvt*hold:               boolean
-!URxvt*externalBorder:     number
 URxvt*internalBorder:     3
-!URxvt*borderLess:         boolean
-!URxvt*skipBuiltinGlyphs:  boolean
-!URxvt*lineSpace:          number
-!URxvt*pointerBlankDelay:  number
-!URxvt*backspacekey:       string
-!URxvt*deletekey:          string
-!URxvt*selectstyle:        mode
-!URxvt*print-pipe:         string
-!URxvt*modifier:           modifier
-!URxvt*cutchars:           string
-URxvt*cutchars: BACKSLASH '"'&()*,;<=>?@[]{|}
-!URxvt*answerbackString:   string
-!URxvt*secondaryScreen:    boolean
-!URxvt*secondaryScroll:    boolean
-!URxvt*perl-lib:           string
-!URxvt*perl-eval:          perl-eval
-!URxvt*perl-ext-common:    string
-!URxvt*perl-ext:           string
-!URxvt*keysym.sym:         keysym
+URxvt*transparent: false
 
+!URxvt*background:              S_base03
 
-!### xcalc
+! xcalc
 xcalc*geometry: 200x275
 xcalc.ti.bevel.background: #111111
 xcalc.ti.bevel.screen.background: Black
@@ -185,14 +153,17 @@ xcalc.ti.button37.background: #555595
 xcalc.ti.button38.background: #555595
 xcalc.ti.button39.background: #555595
 
-!### xlock
-!XLock.font: FTahoma24
-XLock.font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
+! xlock
+XLock*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
 XLock.background: #012C66
 XLock.foreground: #6D8AA2
 XLock.username: Username: 
 XLock.info: Enter password to unlock!
 
-!### Size of X Cursors
-Xcursor.size: 32
-Xcursor.theme: pArch-24
+! X Cursors
+Xcursor.size: 25
+
+! Xdvi
+XDvi.background: white
+XDvi:shrinkFactor: 7
+
