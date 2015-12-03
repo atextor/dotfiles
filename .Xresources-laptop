@@ -53,7 +53,9 @@ URxvt*color13:                 #6c71c4
 URxvt*color14:                 #93a1a1
 URxvt*color15:                 #fdf6e3
 URxvt.urgentOnBell: true 
-URxvt*perl-lib: /usr/lib/urxvt
+!URxvt*perl-lib: /usr/lib/urxvt
+URxvt*perl-lib: /home/tex/.urxvt
+
 URxvt*perl-ext-common: matcher,searchable-scrollback,selection-pastebin,selection-popup,selection,mark-yank-urls
 URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
 URxvt.perl-ext: selection,mark-yank-urls
