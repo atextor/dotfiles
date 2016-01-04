@@ -58,11 +58,8 @@ function unit_locale() {
 	fi
 }
 
-# Echoes one of: home laptop lab hsrm hpux sun, or nothing
+# Echoes one of: home laptop lab hsrm, or nothing
 function whereami() {
-	system=$(uname)
-	if [ $system = "HP-UX" ]; then echo "hpux"; exit; fi
-	if [ $system = "SunOS" ]; then echo "sun"; exit; fi
 	if [ $HOSTNAME = "tengu" ]; then echo "home"; exit; fi
 	if [ $HOSTNAME = "pyrolisk" ]; then echo "laptop"; exit; fi
 	if [ $HOSTNAME = "warg" ]; then echo "raspi"; exit; fi
@@ -85,8 +82,7 @@ function ask() {
 		n*|N*) return 1 ;;
 		*) return 0 ;;
 	esac
-}
-
+} 
 
 # Require can be used by other functions to make sure that certain commands exist
 # before a whole process of things is started (which potentially leaves temp files and such)
@@ -353,7 +349,7 @@ export PATH
 # Manpath
 [ -d /usr/share/man ] && export MANPATH=/usr/share/man:$MANPATH
 
-# Determine if this is an interactive shell. Useful to exclude intercative-shell-only settings later.
+# Determine if this is an interactive shell. Useful to exclude interactive-shell-only settings later.
 unset INTERACTIVE
 if [ ! -z "$PS1" ]; then
 	export INTERACTIVE=true
@@ -423,6 +419,7 @@ set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
 #set nobeep
 
+# Run commands that must not be called in an non-interactive shell (e.g., during an scp)
 if [ "x$INTERACTIVE" = "xtrue" ]; then
 	# disable flow control (i.e., CTRL-S freezing the terminal)
 	stty -ixon
@@ -540,34 +537,10 @@ hsrm)
 	unset https_proxy
 	unset ftp_proxy
 	unset socks_proxy
-#	export http_proxy="http://proxy.cs.hs-rm.de:8080"
-#	export https_proxy="http://proxy.cs.hs-rm.de:8080"
-#	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
-#	export socks_proxy="http://socks.cs.hs-rm.de:1080"
-	;;
-hpux)
-	export JAVA_HOME="/opt/java1.4"
-	export PATH=$JAVA_HOME:$PATH
-
-	# Terminal settings
-	if [ ! $TERM = "screen" ]; then
-		eval `tset -s -Q -m ':?hp' `
-	fi
-	stty erase "^H" kill "^U" intr "^C" eof "^D" susp "^Z" hupcl ixon ixoff tostop tabs
-
-	# Set up shell environment:
-	set noclobber
-	set history=20
-	;;
-sun)
-	# Path
-	PATH=/usr/bin:/usr/ucb:/etc:.:$PATH
-	export PATH
-
-	# Terminal settings
-	# istrip (-istrip) - Strip (do not strip)	input	characters to seven bits.
-	stty -istrip
-	# setenv TERM `tset -Q -`
+	export http_proxy="http://proxy.cs.hs-rm.de:8080"
+	export https_proxy="http://proxy.cs.hs-rm.de:8080"
+	export ftp_proxy="http://proxy.cs.hs-rm.de:8080"
+	export socks_proxy="http://socks.cs.hs-rm.de:1080"
 	;;
 esac
 
