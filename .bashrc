@@ -423,7 +423,7 @@ set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
 #set nobeep
 
-if [ $INTERACTIVE = "true" ]; then
+if [ "x$INTERACTIVE" = "xtrue" ]; then
 	# disable flow control (i.e., CTRL-S freezing the terminal)
 	stty -ixon
 
@@ -929,6 +929,11 @@ function servethis() {
 # This is useful whenever you don't want a command to behave differently when piping in or out of it
 function faketty() {
 	script -eqfc "$(printf "%q " "$@")";
+}
+
+function rand() {
+	files=(*)
+	printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
 }
 
 # Taken from https://gist.github.com/cdown/1163649

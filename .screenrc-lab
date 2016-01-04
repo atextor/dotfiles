@@ -20,6 +20,7 @@ hardstatus alwayslastline "  %{= kw}%?%-Lw%?%{= bw}%n*%f %t%?(%u)%?%{= kw}%?%+Lw
 
 #term screen-256color
 terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+terminfo rxvt-unicode-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 bind q select 10
 bind w select 11
