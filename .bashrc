@@ -423,7 +423,7 @@ set -b              # report status if bg job terminated
 #set bell-style visible   # goes to inputrc!
 #set nobeep
 
-if [ $INTERACTIVE = "true" ]; then
+if [ "x$INTERACTIVE" = "xtrue" ]; then
 	# disable flow control (i.e., CTRL-S freezing the terminal)
 	stty -ixon
 
