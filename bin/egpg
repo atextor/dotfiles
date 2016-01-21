@@ -1,0 +1,2 @@
+#!/bin/sh
+gpg -e -r mail@atextor.
