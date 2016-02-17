@@ -300,6 +300,10 @@ alias today='date --iso-8601'
 # Bash completion
 #---------------------------------------------------------------------
 
+if [ -f /etc/bash_completion  ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
 # Only enable programmable bash completion for certain commands
 complete -d cd
 enable_completion_commands="git nmcli pacman"
