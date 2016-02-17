@@ -92,6 +92,9 @@ augroup latex
 	au FileType tex map ,l :w!<CR>:!make 2>&1 >/dev/null && xdvi-remote.sh refresh<CR><CR>
 augroup END
 
+" RDF
+" Requires Bundle 'niklasl/vim-rdf' in ~/.vimrc.bundles.local
+au BufRead,BufNewFile *.ttl set filetype=turtle
 
 " Gvim settings
 if has('gui_running')
