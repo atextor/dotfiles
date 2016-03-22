@@ -349,6 +349,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 [ -d $HOME/git/data-science-at-the-command-line/tools ] && PATH="$HOME/git/data-science-at-the-command-line/tools:$PATH"
 [ -d $HOME/.rvm/bin ] && PATH="$HOME/.rvm/bin:$PATH"
 [ -d $HOME/.rvm/rubies/default/bin ] && PATH="$HOME/.rvm/rubies/default/bin:$PATH"
+[ -d $HOME/git/rdf.sh ] && PATH="$HOME/git/rdf.sh:$PATH"
 export PATH
 
 # Manpath
