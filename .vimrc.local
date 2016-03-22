@@ -89,7 +89,9 @@ augroup latex
 	au FileType tex map <ESC>k :silent !evince-remote.sh pgup 2>&1 >/dev/null<CR>
 	au FileType tex map ,x :execute '!xdvi -editor "vim --servername vimtex --remote +\%l \%f" -sourceposition ' . line(".") . expand("%") . " " . expand("%:r") . ".dvi &"<CR><CR>
 	"au FileType tex map ,l :w!<CR>:!clear; latex %; xdvi %<.dvi &<CR><CR>
-	au FileType tex map ,l :w!<CR>:!make 2>&1 >/dev/null && xdvi-remote.sh refresh<CR><CR>
+	"au FileType tex map ,l :w!<CR>:!make 2>&1 >/dev/null && xdvi-remote.sh refresh<CR><CR>
+	"au FileType tex map ,l :w!<CR>:!xelatex -src-specials -shell-escape %:r 2>&1 >/dev/null <CR><CR>
+	au FileType tex map ,l :w!<CR>:!make TARGET=%:r 2>&1 >/dev/null <CR><CR>
 augroup END
 
 " RDF
@@ -135,4 +137,6 @@ let g:syntastic_mode_map = {
    \ "active_filetypes": [],
    \ "passive_filetypes": ["tex"] }
 
+" Switch off automatic hiding of delimiters when editing latex, see :h ft-tex-syntax
+let g:tex_conceal = "amgs"
 
