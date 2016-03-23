@@ -140,3 +140,10 @@ let g:syntastic_mode_map = {
 " Switch off automatic hiding of delimiters when editing latex, see :h ft-tex-syntax
 let g:tex_conceal = "amgs"
 
+" Switch off automatic replacement of latex quotes (e.g., " -> "`)
+let g:Tex_SmartKeyQuote = 0
+
+" Don't automatically add second quotes
+" Default: let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairs = {'(':')', '[':']', '{':'}'}
+
