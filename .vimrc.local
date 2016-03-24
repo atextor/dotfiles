@@ -148,6 +148,6 @@ let g:Tex_SmartKeyQuote = 0
 let g:AutoPairs = {'(':')', '[':']', '{':'}'}
 
 " Ignore latex specific stuff in nerdtree
-let NERDTreeIgnore = ['\.aux$', '\.bbl$', '\.blg$', '\.dvi$', '\.log$', '\.lol$', '\.lot$', '\.out$', '\.toc$', '\.pyg$']
+let NERDTreeIgnore = ['\.aux$', '\.bbl$', '\.blg$', '\.dvi$', '\.log$', '\.lol$', '\.lot$', '\.out$', '\.toc$', '\.pyg$', '\.pdf$']
 
 
