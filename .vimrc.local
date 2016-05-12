@@ -145,9 +145,10 @@ let g:Tex_SmartKeyQuote = 0
 
 " Don't automatically add second quotes
 " Default: let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-let g:AutoPairs = {'(':')', '[':']', '{':'}'}
+"let g:AutoPairs = {'(':')', '[':']', '{':'}'}
+let g:AutoPairs = {}
 
 " Ignore latex specific stuff in nerdtree
-let NERDTreeIgnore = ['\.aux$', '\.bbl$', '\.blg$', '\.dvi$', '\.log$', '\.lol$', '\.lot$', '\.out$', '\.toc$', '\.pyg$', '\.pdf$']
+let NERDTreeIgnore = ['\.aux$', '\.bbl$', '\.blg$', '\.dvi$', '\.log$', '\.lol$', '\.lot$', '\.out$', '\.toc$', '\.pyg$', '\.pdf$', '\.brf$', '^_minted']
 
 

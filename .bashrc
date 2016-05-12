@@ -263,6 +263,7 @@ require grc quiet && {
 	alias netstat='grc -es --colour=auto netstat'
 	alias traceroute='grc -es --colour=auto traceroute'
 	alias tail='grc -es --colour=auto tail' 
+	alias diff='grc -es --colour=auto diff'
 }
 
 # misc. convenience binds
