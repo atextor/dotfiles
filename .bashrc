@@ -480,6 +480,7 @@ laptop)
 	export PATH=$JAVA_HOME/bin:$PATH
 	export PATH=$PATH:/home/tex/bin/apache-jena-3.0.1/bin
 	export PATH=$PATH:/usr/local/texlive/2015/bin/x86_64-linux
+	export PATH=$PATH:/home/tex/bin/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04/bin
 	;;
 raspi)
 	alias rn='rename.pl'

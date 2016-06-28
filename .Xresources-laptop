@@ -83,7 +83,8 @@ URxvt*perl-lib: /home/tex/.urxvt/
 URxvt.perl-ext: selection,mark-yank-urls
 URxvt*urlLauncher: chromium-browser
 
-URxvt*termName:           rxvt-unicode-256color
+!URxvt*termName:           rxvt-unicode-256color
+URxvt*termName: rxvt-unicode
 URxvt*geometry:           159x60
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
