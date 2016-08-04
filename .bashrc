@@ -351,6 +351,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 [ -d $HOME/.rvm/bin ] && PATH="$HOME/.rvm/bin:$PATH"
 [ -d $HOME/.rvm/rubies/default/bin ] && PATH="$HOME/.rvm/rubies/default/bin:$PATH"
 [ -d $HOME/git/rdf.sh ] && PATH="$HOME/git/rdf.sh:$PATH"
+[ -d $HOME/git/rakudobrew/bin ] && PATH="$HOME/git/rakudobrew/bin:$PATH"
 export PATH
 
 # Manpath
@@ -403,6 +404,9 @@ export SBT_OPTS=-Xmx512M
 #[ "$TERM" = "screen.rxvt" ] && export TERM="screen"
 # According to `man 1 gpg-agent':
 export GPG_TTY=`tty`
+
+# God dammit gtk
+export GTK_OVERLAY_SCROLLING=0
 
 # Misc convenience vars vars
 export FH="textor@login1.cs.hs-rm.de"
