@@ -293,6 +293,7 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias redshift='redshift -l 50.0856:8.2387'
 alias rdf2dot='rapper -o dot'
 alias today='date --iso-8601'
+alias plainps1='export PS1="\u@\h[\w]$ "'
 
 # load vstags if available (https://github.com/atextor/vstags)
 [ -e ~/git/vstags/vstags.sh ] && . ~/git/vstags/vstags.sh
