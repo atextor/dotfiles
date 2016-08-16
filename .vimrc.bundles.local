@@ -1,2 +1,3 @@
 Bundle 'jamessan/vim-gnupg'
 Bundle 'niklasl/vim-rdf'
+Bundle 'atextor/sparql.vim'
