@@ -24,7 +24,8 @@ termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce "on"
 
 termcapinfo xterm-color|xterm-16color|xterm-88color|xterm-256color|screen|rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-term 'screen'
+#term 'screen'
+term 'screen-256color'
 
 bind q select 10
 bind w select 11
