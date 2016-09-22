@@ -757,6 +757,7 @@ function ep {
 
 	case "$lce" in
 		gz) [ ${1:$[${#1}-7]:7} = ".tar.gz" ] && tar xfvz "$1" || gunzip "$1";;
+		xz) [ ${1:$[${#1}-7]:7} = ".tar.xz" ] && tar xfvJ "$1";;
 		tgz) tar xfvz "$1";;
 		bz2) [ ${1:$[${#1}-8]:8} = ".tar.bz2" ] && tar xfvj "$1" || bunzip2 "$1";;
 		tar) tar xfv "$1";;
