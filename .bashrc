@@ -126,20 +126,20 @@ function command_not_found_handle() {
 }
 
 #---------------------------------------------------------------------
-# Prompt Functions
+# Prompt Function
 #---------------------------------------------------------------------
 
-# Construct informative prompt for different version control systems (vcs).
-# Code inspired by http://glandium.org/blog/?p=170, display inspired
-# by http://briancarper.net/blog/570/git-info-in-your-zsh-prompt.
-# My solution doesn't have the vcs_info limitation mentioned there though :)
-# Currently supports git and svn (the only ones I use).
-__prompt_vcs() {
-	local sub_dir git_dir svn_dir
-	vcs_status_indicator="◾"
+prompt() {
+	indicator="◾"
 
-	git_dir() {
-		git rev-parse --show-cdup 2>&1 &>/dev/null || return 1
+	ref=
+	vcs=
+	additional=
+	has_staged=
+	has_unstaged=
+	has_untracked=
+	additional=
+	if git rev-parse --show-cdup 2>&1 &>/dev/null; then
 		ref=$(git symbolic-ref -q HEAD || git name-rev --name-only HEAD 2>/dev/null)
 		ref=${ref#refs/heads/}
 		vcs="git"
@@ -155,62 +155,33 @@ __prompt_vcs() {
 			esac
 		done <<< "$(git status --porcelain 2> /dev/null)"
 
-		additional=
 		ahead=$(git status 2>/dev/null|/bin/grep -Eo 'ahead of .+ by [0-9]+ commit'|cut -d' ' -f5)
-		[ ! -z $ahead ] && additional="$NONE$color_additional↑${ahead}$NONE"
+		[ ! -z $ahead ] && additional="↑${ahead}"
 
-		stat=
-		[ $staged -eq 1 ] && stat+="$color_ok$vcs_status_indicator$NONE"
-		[ $unstaged -eq 1 ] && stat+="$color_medium$vcs_status_indicator$NONE"
-		[ $untracked -eq 1 ] && stat+="$color_alert$vcs_status_indicator$NONE"
-		return 0
-	}
+		[ $staged -eq 1 ] && has_staged="$indicator"
+		[ $unstaged -eq 1 ] && has_unstaged="$indicator"
+		[ $untracked -eq 1 ] && has_untracked="$indicator"
+	fi
 
-	# TODO somehow use "timeout(1)" to limit the run time of svn.
-	# svn status sometimes takes several seconds, which can be incredibly annoying
-	# if you are waiting for your prompt.
-	svn_dir() {
-		[ -d ".svn" ] || return 1
-		which svn 2>&1 &>/dev/null || return 1
-		base_dir="."
-		while [ -d "$base_dir/../.svn" ]; do base_dir="$base_dir/.."; done
-		base_dir=$(readlink -f "$base_dir")
-		ref=$(svn info "$base_dir" | awk '/^URL/ { sub(".*/","",$0); r=$0 } /^Revision/ { sub("[^0-9]*","",$0); print r":"$0 }')
-		vcs="svn"
+	branch_bar=
+	vcs_left_brk=
+	vcs_right_brk=
+	if [ ! -z $vcs ]; then
+		branch_bar="|"
+		vcs_left_brk='['
+		vcs_right_brk=']'
+	fi
 
-		added=0; modified=0; untracked=0
-		while IFS= read -r line; do
-			case "${line:0:1}" in
-				A) added=1;;
-				M|D) modified=1;;
-				'?') untracked=1;;
-			esac
-		done <<< "$(svn status 2> /dev/null)"
-
-		additional=
-		stat=
-		[ $added -eq 1 ] && stat+="$color_ok$vcs_status_indicator$NONE"
-		[ $modified -eq 1 ] && stat+="$color_medium$vcs_status_indicator$NONE"
-		[ $untracked -eq 1 ] && stat+="$color_alert$vcs_status_indicator$NONE"
-		return 0
-	}
-
-	git_dir || svn_dir || return
-	echo -e "${NONE}[${WHITE}${vcs}${NONE}${color_additional}|${GREEN}${ref}${stat}${additional}${NONE}]"
+	if [ "`whoami`" = "root" ]; then
+		user_color="${color_alert}"
+	else
+		user_color="$WHITE"
+	fi
+	echo -e "\[${NONE}\]\[${user_color}\]\u\[${NONE}\]\[${color_additional}\]@\[${WHITE}\]\h\[${NONE}\][\[${color_dir}\]\w\[${NONE}\]]${vcs_left_brk}\[${WHITE}\]${vcs}\[${color_additional}\]${branch_bar}\[${GREEN}\]${ref}\[${color_ok}\]${has_staged}\[${color_medium}\]${has_unstaged}\[${color_alert}\]${has_untracked}\[${color_additional}\]${additional}\[${NONE}\]${vcs_right_brk}$ "
 }
 
-# Function that constructs the prompt string
-prompt() {
-	if [ "`whoami`" = "root" ]; then
-		user="\[${color_alert}\]\u"
-	else
-		user="\[$WHITE\]\u"
-	fi
-	host="\[${NONE}${color_additional}\]@\[${WHITE}\]\h"
-	curdir="\[${NONE}\][\[${color_dir}\]\w\[${NONE}\]]"
-	vcsinfo="\[${NONE}\]\$(__prompt_vcs)"
-
-	echo -e "${user}${host}${curdir}${vcsinfo}\[${NONE}\]\\$ "
+set_prompt() {
+	PS1="$(prompt)"
 }
 
 #---------------------------------------------------------------------
@@ -293,6 +264,7 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias redshift='redshift -l 50.0856:8.2387'
 alias rdf2dot='rapper -o dot'
 alias today='date --iso-8601'
+alias plainps1='export PS1="\u@\h[\w]$ "'
 
 # load vstags if available (https://github.com/atextor/vstags)
 [ -e ~/git/vstags/vstags.sh ] && . ~/git/vstags/vstags.sh
@@ -351,6 +323,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 [ -d $HOME/.rvm/bin ] && PATH="$HOME/.rvm/bin:$PATH"
 [ -d $HOME/.rvm/rubies/default/bin ] && PATH="$HOME/.rvm/rubies/default/bin:$PATH"
 [ -d $HOME/git/rdf.sh ] && PATH="$HOME/git/rdf.sh:$PATH"
+[ -d $HOME/git/rakudobrew/bin ] && PATH="$HOME/git/rakudobrew/bin:$PATH"
 export PATH
 
 # Manpath
@@ -363,7 +336,7 @@ if [ ! -z "$PS1" ]; then
 fi
 
 # Prompt
-export PS1=$(prompt) # see above function
+export PROMPT_COMMAND=set_prompt
 export PS2="\[${WHITE}\]>\[${NONE}\] "
 
 # Bash Settings
@@ -403,6 +376,9 @@ export SBT_OPTS=-Xmx512M
 #[ "$TERM" = "screen.rxvt" ] && export TERM="screen"
 # According to `man 1 gpg-agent':
 export GPG_TTY=`tty`
+
+# God dammit gtk
+export GTK_OVERLAY_SCROLLING=0
 
 # Misc convenience vars vars
 export FH="textor@login1.cs.hs-rm.de"
@@ -480,6 +456,7 @@ laptop)
 	export PATH=$JAVA_HOME/bin:$PATH
 	export PATH=$PATH:/home/tex/bin/apache-jena-3.0.1/bin
 	export PATH=$PATH:/usr/local/texlive/2015/bin/x86_64-linux
+	export PATH=$PATH:/home/tex/bin/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04/bin
 	;;
 raspi)
 	alias rn='rename.pl'

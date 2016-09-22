@@ -12,5 +12,5 @@
 	ui = true
 [push]
 	default = simple
-[http]
-	sslCAInfo = /users/a_textor/git/git-certs/stash.sva.de.pem
+[core]
+	quotepath = off

@@ -40,7 +40,8 @@
 !
 URxvt.intensityStyles:         false
 URxvt*background:              #002b36
-URxvt*foreground:              #839496
+!URxvt*foreground:              #839496
+URxvt*foreground:              #fdf6e3
 URxvt*fadeColor:               #002b36
 URxvt*cursorColor:             #93a1a1
 URxvt*pointerColorBackground:  #586e75
@@ -83,7 +84,8 @@ URxvt*perl-lib: /home/tex/.urxvt/
 URxvt.perl-ext: selection,mark-yank-urls
 URxvt*urlLauncher: chromium-browser
 
-URxvt*termName:           rxvt-unicode-256color
+!URxvt*termName:           rxvt-unicode-256color
+URxvt*termName: rxvt-unicode
 URxvt*geometry:           159x60
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
