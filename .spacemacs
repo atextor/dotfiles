@@ -36,7 +36,10 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     ;; auto-completion
+     (auto-completion :variables
+                       auto-completion-complete-with-key-sequence "jk"
+                       auto-completion-return-key-behavior nil
+                       auto-completion-tab-key-behavior 'cycle)
      ;; better-defaults
      emacs-lisp
      colors
@@ -57,10 +60,10 @@ values."
      nginx
      scala
      shell-scripts
-     ;vim-powerline
      yaml
-     ;semweb
-     ;; version-control
+     smex
+     semantic
+	 ranger
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -125,7 +128,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -133,6 +136,7 @@ values."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
+                                (bookmarks . 5)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
@@ -141,8 +145,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(material
+                         spacemacs-dark
+                         spacemacs-light
+                         solarized-dark
+                         monokai
+                         leuven
+                         zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -254,7 +263,7 @@ values."
    ;; If non nil show the color guide hint for transient state keys. (default t)
    dotspacemacs-show-transient-state-color-guide t
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-unicode-symbols nil
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
@@ -303,6 +312,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+    evil-shift-round nil
   )
 
 (defun dotspacemacs/user-config ()
@@ -313,11 +323,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ; Keybindings
   (define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
 
-  ;(define-key evil-normal-state-map (kbd "C-h") 'previous-buffer)
-  ;(define-key evil-normal-state-map (kbd "C-l") 'next-buffer)
   (define-key evil-normal-state-map (kbd "C-h") 'tabbar-ruler-backward)
   (define-key evil-normal-state-map (kbd "C-l") 'tabbar-ruler-forward)
 
@@ -330,14 +339,25 @@ you should place your code here."
 
   (define-key evil-normal-state-map (kbd "<f9>") 'delete-trailing-whitespace)
 
+  ; LaTeX stuff
   (evil-leader/set-key ",l" 'latex-preview-pane-update)
   ; Hide latex preview pane from minor modes list
   (diminish 'latex-preview-pane-mode)
 
+  ; Not working yet. Figure out how to call doc-view-next-page from outside of DocView
   ;(global-unset-key "\M-j")
   ;(global-unset-key "\M-k")
   ;(define-key evil-normal-state-map (kbd "M-j") 'doc-view-next-page)
   ;(define-key evil-normal-state-map (kbd "M-k") 'doc-view-previous-page)
+
+  ; Settings
+
+  (setq-default
+   tab-width 4
+   c-basic-offset 4
+   indent-tabs-mode t
+   evil-move-beyond-eof nil
+  )
 
   ; Enable line numbers
   (global-linum-mode)
@@ -362,6 +382,8 @@ you should place your code here."
   (setq tabbar-ruler-popup-scrollbar nil)
   (tabbar-ruler-group-buffer-groups)
 
+  (add-hook 'text-mode-hook 'auto-fill-mode)
+  (add-hook 'makefile-mode-hook 'whitespace-mode)
 
   ; Configure fill column indicator
 ;  (add-hook 'text-mode-hook (lambda ()
