@@ -64,6 +64,7 @@ values."
      smex
      semantic
 	 ranger
+	 search-engine
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -351,12 +352,12 @@ you should place your code here."
   ;(define-key evil-normal-state-map (kbd "M-k") 'doc-view-previous-page)
 
   ; Settings
-
   (setq-default
    tab-width 4
    c-basic-offset 4
    indent-tabs-mode t
    evil-move-beyond-eof nil
+   compilation-window-height 13
   )
 
   ; Enable line numbers
@@ -364,10 +365,24 @@ you should place your code here."
 
   ; Set scrollof
   (setq scroll-margin 10)
+  (add-hook 'term-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
+  (add-hook 'shell-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
+  (add-hook 'compilation-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
+  ;; (add-hook 'eshell-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  ;; (add-hook 'messages-buffer-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  ;; (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  ;; (add-hook 'erc-mode-hook (lambda () (setq-local 'scroll-margin 0)))
 
   ; Set external browser
   (setq browse-url-browser-function 'browse-url-generic
+		engine/browser-function 'browse-url-generic
         browse-url-generic-program "vivaldi")
+
+  ; Add search engines
+  (push '(dictcc
+          :name "dict.cc"
+          :url "http://www.dict.cc/?s=%s")
+         search-engine-alist)
 
   ; Configure powerline
   (setq powerline-default-separator 'arrow-fade)
