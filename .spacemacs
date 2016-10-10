@@ -313,7 +313,9 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-    evil-shift-round nil
+
+    ;; Squish warning about MANPATH https://github.com/syl20bnr/spacemacs/issues/3920
+	(setq exec-path-from-shell-check-startup-files nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -358,6 +360,7 @@ you should place your code here."
    indent-tabs-mode t
    evil-move-beyond-eof nil
    compilation-window-height 13
+   evil-shift-round nil
   )
 
   ; Enable line numbers
