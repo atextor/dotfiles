@@ -48,7 +48,7 @@ values."
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
-     ;spell-checking
+     spell-checking
      c-c++
      syntax-checking
      evil-commentary
@@ -65,6 +65,7 @@ values."
      semantic
 	 ranger
 	 search-engine
+	 pdf-tools
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -210,7 +211,7 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location nil
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
@@ -410,6 +411,18 @@ you should place your code here."
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'makefile-mode-hook 'whitespace-mode)
 
+  ; Setup spell checking
+  ; No spell checking by default
+  (setq-default dotspacemacs-configuration-layers
+    '((spell-checking :variables spell-checking-enable-by-default nil)))
+  ; Use en_US and de_DE dictionaries
+  (setq ispell-program-name "hunspell")
+  (setq ispell-local-dictionary "de_DE")
+  (setq ispell-local-dictionary-alist '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "de_DE,en_US") nil utf-8)))
+
+  ; Stop AUCTeX from creating 'auto' directory
+  ;(setq TeX-auto-local nil)
+
   ; Configure fill column indicator
 ;  (add-hook 'text-mode-hook (lambda ()
 ;                            (turn-on-auto-fill)
@@ -431,6 +444,8 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ispell-local-dictionary "de_DE")
+ '(ispell-personal-dictionary "~/.dictionary")
  '(mode-icons
    (quote
 	(("\\`CSS\\'" "css" xpm)
