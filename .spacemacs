@@ -47,7 +47,8 @@ values."
      org
      (shell :variables
              shell-default-height 30
-             shell-default-position 'bottom)
+             shell-default-position 'bottom
+			 shell-default-shell 'eshell)
      spell-checking
      c-c++
      syntax-checking
@@ -562,6 +563,7 @@ you should place your code here."
 	 ("\\` ?AI\\'" 61500 FontAwesome)
 	 ("\\` ?Isearch\\'" 61442)
 	 ("\\`PDFView\\'" 61889 FontAwesome)
+	 ("\\`EShell\\'" 61728 FontAwesome)
 	 (default 61529 FontAwesome)
 	 ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(pdf-latex-command "xxtex"))
