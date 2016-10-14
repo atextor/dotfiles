@@ -344,15 +344,23 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "<f9>") 'delete-trailing-whitespace)
 
   ; LaTeX stuff
-  (evil-leader/set-key ",l" 'latex-preview-pane-update)
   ; Hide latex preview pane from minor modes list
   (diminish 'latex-preview-pane-mode)
 
-  ; Not working yet. Figure out how to call doc-view-next-page from outside of DocView
-  ;(global-unset-key "\M-j")
-  ;(global-unset-key "\M-k")
-  ;(define-key evil-normal-state-map (kbd "M-j") 'doc-view-next-page)
-  ;(define-key evil-normal-state-map (kbd "M-k") 'doc-view-previous-page)
+  (defun next-pdf-page ()
+	"Searches for the window with the open pdf document and scrolls down in it if available."
+	(interactive)
+	(mapc (lambda (window) (with-selected-window window (pdf-view-next-page-command 1)))
+		  (-filter (lambda (window) (string= "pdf" (substring (buffer-name (window-buffer window)) -3))) (window-list))))
+
+  (defun previous-pdf-page ()
+	"Searches for the window with the open pdf document and scrolls up in it if available."
+	(interactive)
+	(mapc (lambda (window) (with-selected-window window (pdf-view-previous-page-command 1)))
+		  (-filter (lambda (window) (string= "pdf" (substring (buffer-name (window-buffer window)) -3))) (window-list))))
+
+  (define-key evil-normal-state-map (kbd "M-j") 'next-pdf-page)
+  (define-key evil-normal-state-map (kbd "M-k") 'previous-pdf-page)
 
   ; Settings
   (setq-default
@@ -553,6 +561,7 @@ you should place your code here."
 	 ("\\`Image\\[png\\]\\'" "png" ext)
 	 ("\\` ?AI\\'" 61500 FontAwesome)
 	 ("\\` ?Isearch\\'" 61442)
+	 ("\\`PDFView\\'" 61889 FontAwesome)
 	 (default 61529 FontAwesome)
 	 ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(pdf-latex-command "xxtex"))
