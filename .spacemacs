@@ -419,6 +419,9 @@ you should place your code here."
   ; Setup various mode specific settings
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'makefile-mode-hook 'whitespace-mode)
+  (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-language-standard "c11")))
+  (add-hook 'c-mode-hook (lambda () (setq flycheck-gcc-language-standard "c11")))
+  (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
 
   ; Setup spell checking
   ; No spell checking by default
@@ -564,6 +567,7 @@ you should place your code here."
 	 ("\\` ?Isearch\\'" 61442)
 	 ("\\`PDFView\\'" 61889 FontAwesome)
 	 ("\\`EShell\\'" 61728 FontAwesome)
+	 ("\\`GNUmakefile\\'" 61459 FontAwesome)
 	 (default 61529 FontAwesome)
 	 ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(pdf-latex-command "xxtex"))
