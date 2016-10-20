@@ -82,7 +82,7 @@ function ask() {
 		n*|N*) return 1 ;;
 		*) return 0 ;;
 	esac
-} 
+}
 
 # Require can be used by other functions to make sure that certain commands exist
 # before a whole process of things is started (which potentially leaves temp files and such)
@@ -233,7 +233,7 @@ require grc quiet && {
 	alias ld='grc -es --colour=auto ld'
 	alias netstat='grc -es --colour=auto netstat'
 	alias traceroute='grc -es --colour=auto traceroute'
-	alias tail='grc -es --colour=auto tail' 
+	alias tail='grc -es --colour=auto tail'
 	alias diff='grc -es --colour=auto diff'
 }
 
@@ -906,7 +906,7 @@ function urlencode() {
 		case $c in
 			[a-zA-Z0-9.~_-]) printf "$c" ;;
 			*) printf '%s' "$c" | xxd -p -c1 |
-				   while read c; do printf '%%%s' "$c"; done ;;
+				while read c; do printf '%%%s' "$c"; done ;;
 		esac
 	done
 }
