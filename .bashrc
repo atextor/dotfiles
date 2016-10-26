@@ -911,7 +911,7 @@ function urlencode() {
 		case $c in
 			[a-zA-Z0-9.~_-]) printf "$c" ;;
 			*) printf '%s' "$c" | xxd -p -c1 |
-				   while read c; do printf '%%%s' "$c"; done ;;
+				while read c; do printf '%%%s' "$c"; done ;;
 		esac
 	done
 }
