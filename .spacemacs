@@ -49,7 +49,8 @@ values."
              shell-default-height 30
              shell-default-position 'bottom
 			 shell-default-shell 'eshell)
-     spell-checking
+     (spell-checking :variables
+			 spell-checking-enable-by-default nil)
      c-c++
      syntax-checking
      evil-commentary
@@ -425,9 +426,6 @@ you should place your code here."
   (add-hook 'pdf-view-mode-hook (lambda () (linum-mode 0)))
 
   ; Setup spell checking
-  ; No spell checking by default
-  (setq-default dotspacemacs-configuration-layers
-    '((spell-checking :variables spell-checking-enable-by-default nil)))
   ; Use en_US and de_DE dictionaries
   (setq ispell-program-name "hunspell")
   (setq ispell-local-dictionary "de_DE")
