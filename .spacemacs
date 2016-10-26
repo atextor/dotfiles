@@ -422,6 +422,7 @@ you should place your code here."
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-gcc-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
+  (add-hook 'pdf-view-mode-hook (lambda () (linum-mode 0)))
 
   ; Setup spell checking
   ; No spell checking by default
@@ -433,7 +434,11 @@ you should place your code here."
   (setq ispell-local-dictionary-alist '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "de_DE,en_US") nil utf-8)))
 
   ; Stop AUCTeX from creating 'auto' directory
+  ; Somehow doesn't work this way. Need to investigate
   ;(setq TeX-auto-local nil)
+
+  (org-babel-do-load-languages 'org-babel-load-languages
+	 '((R . t) (sh . t) (shell . t) (emacs-lisp . t) (sparql . t)))
 
   ; Configure fill column indicator
 ;  (add-hook 'text-mode-hook (lambda ()
@@ -568,6 +573,7 @@ you should place your code here."
 	 ("\\`PDFView\\'" 61889 FontAwesome)
 	 ("\\`EShell\\'" 61728 FontAwesome)
 	 ("\\`GNUmakefile\\'" 61459 FontAwesome)
+	 ("\\`N3/Turtle mode\\'" 61920 FontAwesome)
 	 (default 61529 FontAwesome)
 	 ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(pdf-latex-command "xxtex"))
