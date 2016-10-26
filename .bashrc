@@ -82,7 +82,7 @@ function ask() {
 		n*|N*) return 1 ;;
 		*) return 0 ;;
 	esac
-} 
+}
 
 # Require can be used by other functions to make sure that certain commands exist
 # before a whole process of things is started (which potentially leaves temp files and such)
@@ -233,7 +233,7 @@ require grc quiet && {
 	alias ld='grc -es --colour=auto ld'
 	alias netstat='grc -es --colour=auto netstat'
 	alias traceroute='grc -es --colour=auto traceroute'
-	alias tail='grc -es --colour=auto tail' 
+	alias tail='grc -es --colour=auto tail'
 	alias diff='grc -es --colour=auto diff'
 }
 
@@ -336,7 +336,12 @@ if [ ! -z "$PS1" ]; then
 fi
 
 # Prompt
-export PROMPT_COMMAND=set_prompt
+if [ "$TERM" = "eterm-color" ]; then
+	#export PS1="\[${LIGHTGREY}\]\u\[${CYAN}\]@\[${NONE}\]\h\[${NONE}\][\[${YELLOW}\]\w\[${NONE}\]]$ "
+	export WHITE="$(tput sgr0)$(tput bold)"
+else
+	export PROMPT_COMMAND=set_prompt
+fi
 export PS2="\[${WHITE}\]>\[${NONE}\] "
 
 # Bash Settings
@@ -918,4 +923,3 @@ function urldecode() {
 	local url_encoded="${1//+/ }"
 	printf '%b' "${url_encoded//%/\\x}"
 }
-
