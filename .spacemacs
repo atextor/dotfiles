@@ -425,6 +425,15 @@ you should place your code here."
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
   (add-hook 'pdf-view-mode-hook (lambda () (linum-mode 0)))
 
+  ; Eclipse/Eclim installation is host-dependent
+  (if (string=
+	    (replace-regexp-in-string "\\`[ \t\n]*" ""
+          (replace-regexp-in-string "[ \t\n]*\\'" ""
+            (shell-command-to-string "hostname"))) "vs06")
+    (setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
+          eclim-executable "/users/a_textor/software/eclipse-neon/eclim"
+          eclimd-default-workspace "/users/a_textor/workspaces/neon-eclim"))
+
   ; Setup spell checking
   ; Use en_US and de_DE dictionaries
   (setq ispell-program-name "hunspell")
