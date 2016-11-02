@@ -372,6 +372,7 @@ you should place your code here."
    evil-move-beyond-eof nil
    compilation-window-height 13
    evil-shift-round nil
+   evil-escape-key-sequence "qb" ; default is "fd"
   )
 
   ; Enable line numbers
