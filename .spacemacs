@@ -423,11 +423,14 @@ you should place your code here."
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-gcc-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
-  (add-hook 'pdf-view-mode-hook (lambda () (linum-mode 0)))
+  (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
+
+  ; Org mode
+  (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
 
   ; Eclipse/Eclim installation is host-dependent
   (if (string=
-	    (replace-regexp-in-string "\\`[ \t\n]*" ""
+        (replace-regexp-in-string "\\`[ \t\n]*" ""
           (replace-regexp-in-string "[ \t\n]*\\'" ""
             (shell-command-to-string "hostname"))) "vs06")
     (setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
@@ -509,7 +512,7 @@ you should place your code here."
      ("\\`Markdown\\'" 61641 github-octicons)
      ("\\`GFM\\'" 61641 github-octicons)
      ("\\`Scala\\'" 61787 font-mfizz)
-     ("\\`Magit\\'" 61906 FontAwesome)
+     ("\\`Magit\\(/.*\\|\\)\\'" 61906 FontAwesome)
      ("\\` Pulls\\'" 61586 FontAwesome)
      ("\\`Zip-Archive\\'" 61894 FontAwesome)
      ("\\` ARev\\'" 61473 FontAwesome)
@@ -581,8 +584,16 @@ you should place your code here."
      ("\\`EShell\\'" 61728 FontAwesome)
      ("\\`GNUmakefile\\'" 61459 FontAwesome)
      ("\\`N3/Turtle mode\\'" 61920 FontAwesome)
+     ("\\`SPARQL\\'" 61920 FontAwesome)
+     ("\\`Gitignore\\'" 61906 FontAwesome)
      (default 61529 FontAwesome)
      ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "/usr/bin/evince %s"))))
  '(pdf-latex-command "xxtex"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
