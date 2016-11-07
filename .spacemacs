@@ -425,6 +425,8 @@ you should place your code here."
   (add-hook 'c-mode-hook (lambda () (setq flycheck-gcc-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
   (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
+  (add-hook 'eww-mode-hook (lambda() (local-set-key (kbd "M-h") #'eww-back-url)))
+  (add-hook 'eww-mode-hook (lambda() (local-set-key (kbd "M-l") #'eww-forward-url)))
 
   ; Org mode
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
@@ -587,6 +589,7 @@ you should place your code here."
      ("\\`N3/Turtle mode\\'" 61920 FontAwesome)
      ("\\`SPARQL\\'" 61920 FontAwesome)
      ("\\`Gitignore\\'" 61906 FontAwesome)
+     ("\\`eww\\'" 61612 FontAwesome)
      (default 61529 FontAwesome)
      ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(org-file-apps
