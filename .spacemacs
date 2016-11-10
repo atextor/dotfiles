@@ -364,10 +364,6 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "M-j") 'next-pdf-page)
   (define-key evil-normal-state-map (kbd "M-k") 'previous-pdf-page)
 
-  (evil-define-key 'normal ewmctrl-mode-map (kbd "D") 'ewmctrl-delete-window
-	                                        (kbd "I") 'ewmctrl-change-window-icon-name
-											(kbd "N") 'ewmctrl-change-window-name)
-
   ; Settings
   (setq-default
    tab-width 4
@@ -422,15 +418,21 @@ you should place your code here."
   (remove-hook 'helm-mode-hook 'mode-icons-mode)
   (remove-hook 'helm-minibuffer-set-up-hook 'mode-icons-mode)
 
-  ; Setup various mode specific settings
+  ; Setup various mode specific settings and bindings
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'makefile-mode-hook 'whitespace-mode)
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-gcc-language-standard "c11")))
   (add-hook 'c-mode-hook (lambda () (setq flycheck-clang-include-path (list "/usr/include/SDL2"))))
   (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
-  (add-hook 'eww-mode-hook (lambda() (local-set-key (kbd "M-h") #'eww-back-url)))
-  (add-hook 'eww-mode-hook (lambda() (local-set-key (kbd "M-l") #'eww-forward-url)))
+  (add-hook 'woman-mode-hook (lambda () (define-key woman-mode-map (kbd "C-j") #'evil-scroll-down)))
+  (add-hook 'woman-mode-hook (lambda () (define-key woman-mode-map (kbd "C-k") #'evil-scroll-up)))
+  (evil-define-key 'normal eww-mode-map (kbd "H") 'eww-back-url
+                                        (kbd "L") 'eww-forward-url)
+  (evil-define-key 'normal ewmctrl-mode-map (kbd "D") 'ewmctrl-delete-window
+                                            (kbd "I") 'ewmctrl-change-window-icon-name
+                                            (kbd "N") 'ewmctrl-change-window-name
+                                            (kbd "R") 'ewmctrl-refresh)
 
   ; Org mode
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
@@ -454,6 +456,8 @@ you should place your code here."
   ; Somehow doesn't work this way. Need to investigate
   ;(setq TeX-auto-local nil)
 
+  ; If this results in "Invalid function: org-babel-header-args-safe-fn",
+  ; see https://github.com/syl20bnr/spacemacs/issues/3314
   (org-babel-do-load-languages 'org-babel-load-languages
      '((R . t) (sh . t) (shell . t) (emacs-lisp . t) (sparql . t)))
 
