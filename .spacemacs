@@ -75,7 +75,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
      tabbar-ruler
-	 ewmctrl
+     ewmctrl
    )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -432,7 +432,8 @@ you should place your code here."
   (evil-define-key 'normal ewmctrl-mode-map (kbd "D") 'ewmctrl-delete-window
                                             (kbd "I") 'ewmctrl-change-window-icon-name
                                             (kbd "N") 'ewmctrl-change-window-name
-                                            (kbd "R") 'ewmctrl-refresh)
+                                            (kbd "R") 'ewmctrl-refresh
+                                            (kbd "RET") 'ewmctrl-focus-window)
 
   ; Org mode
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
