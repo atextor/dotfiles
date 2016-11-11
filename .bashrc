@@ -339,9 +339,8 @@ fi
 if [ "$TERM" = "eterm-color" ]; then
 	#export PS1="\[${LIGHTGREY}\]\u\[${CYAN}\]@\[${NONE}\]\h\[${NONE}\][\[${YELLOW}\]\w\[${NONE}\]]$ "
 	export WHITE="$(tput sgr0)$(tput bold)"
-else
-	export PROMPT_COMMAND=set_prompt
 fi
+export PROMPT_COMMAND=set_prompt
 export PS2="\[${WHITE}\]>\[${NONE}\] "
 
 # Bash Settings
