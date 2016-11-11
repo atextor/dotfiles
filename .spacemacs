@@ -68,6 +68,7 @@ values."
      ranger
      search-engine
      pdf-tools
+	 ibuffer
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -427,6 +428,8 @@ you should place your code here."
   (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
   (add-hook 'woman-mode-hook (lambda () (define-key woman-mode-map (kbd "C-j") #'evil-scroll-down)))
   (add-hook 'woman-mode-hook (lambda () (define-key woman-mode-map (kbd "C-k") #'evil-scroll-up)))
+  (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map (kbd "C-j") #'evil-scroll-down)))
+  (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map (kbd "C-k") #'evil-scroll-up)))
   (evil-define-key 'normal eww-mode-map (kbd "H") 'eww-back-url
                                         (kbd "L") 'eww-forward-url)
   (evil-define-key 'normal ewmctrl-mode-map (kbd "D") 'ewmctrl-delete-window
