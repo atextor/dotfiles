@@ -68,7 +68,9 @@ values."
      ranger
      search-engine
      pdf-tools
-	 ibuffer
+     javascript
+     ibuffer
+     semweb
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -77,6 +79,7 @@ values."
    dotspacemacs-additional-packages '(
      tabbar-ruler
      ewmctrl
+	 dictcc
    )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
