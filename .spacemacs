@@ -44,7 +44,9 @@ values."
      emacs-lisp
      colors
      git
-     org
+     (org :variables
+		  org-enable-github-support t
+		  org-enable-bootstrap-support t)
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom
@@ -445,13 +447,15 @@ you should place your code here."
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
 
   ; Eclipse/Eclim installation is host-dependent
-  (if (string=
-        (replace-regexp-in-string "\\`[ \t\n]*" ""
-          (replace-regexp-in-string "[ \t\n]*\\'" ""
-            (shell-command-to-string "hostname"))) "vs06")
-    (setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
+  (when (string= system-name "vs06")
+	(setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
           eclim-executable "/users/a_textor/software/eclipse-neon/eclim"
           eclimd-default-workspace "/users/a_textor/workspaces/neon-eclim"))
+
+  (when (string= system-name "pyrolisk")
+	(setq eclim-eclipse-dirs '("/home/tex/bin/eclipse-neon")
+          eclim-executable "/home/tex/bin/eclipse-neon/eclim"
+          eclimd-default-workspace "/home/tex/workspaces/neon-eclim"))
 
   ; Setup spell checking
   ; Use en_US and de_DE dictionaries
