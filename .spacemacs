@@ -72,6 +72,7 @@ values."
      pdf-tools
      javascript
      ibuffer
+	 ansible
      semweb
      )
    ;; List of additional packages that will be installed without being
