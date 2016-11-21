@@ -250,6 +250,7 @@
       accept_hostkey: yes
     become: yes
     become_user: "{{ target_user }}"
+    when: spacemacs_status.stat.exists == False
 
   # Don't automatically update spacemacs here
 
