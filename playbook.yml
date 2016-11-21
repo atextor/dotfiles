@@ -1,0 +1,262 @@
+---
+- hosts: localhost
+  remote_user: tex
+  become: yes
+  become_method: sudo
+
+  vars_prompt:
+    - name: "private_git_host"
+      prompt: "Enter private git host"
+
+  tasks:
+  - name: Register target user name
+    set_fact:
+      target_user: tex
+      target_home: /home/tex
+
+  - name: Register private git host
+    set_fact:
+      private_git: "gogs@{{ private_git_host}}:tex"
+
+    ### APT repositories
+  - name: SBT APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=2EE0EA64E40A89B84B2DF73499E82A75642AC823
+    when: ansible_os_family == "Debian"
+
+  - name: SBT APT Repo
+    apt_repository: repo='deb https://dl.bintray.com/sbt/debian /' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Vivaldi APT Repo
+    apt_repository: repo='deb http://repo.vivaldi.com/stable/deb/ stable main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Steam APT Repo
+    apt_repository: repo='deb http://repo.steampowered.com/steam/ precise steam' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Git APT Repo
+    apt_repository: repo='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Git src APT Repo
+    apt_repository: repo='deb-src http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: youtube-dl APT Repo
+    apt_repository: repo='deb http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: youtube-dl src APT Repo
+    apt_repository: repo='deb-src http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: JDK APT Repo
+    apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: JDK src APT Repo
+    apt_repository: repo='deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Kodi APT Repo
+    apt_repository: repo='deb http://ppa.launchpad.net/team-xbmc/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Kodi src APT Repo
+    apt_repository: repo='deb-src http://ppa.launchpad.net/team-xbmc/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: NodeJS APT Repo
+    apt_repository: repo='deb http://deb.nodesource.com/node_6.x trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: NodeJS src APT Repo
+    apt_repository: repo='deb-src http://deb.nodesource.com/node_6.x trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+    #### apt-get update
+  - name: Update repostitories
+    apt: update_cache=yes cache_valid_time=3600
+    when: ansible_os_family == "Debian"
+
+    ### Packages
+  - name: Install/Update curl
+    apt: name=curl state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update git
+    apt: name=git state=latest allow_unauthenticated=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update Vivaldi
+    apt: name=vivaldi-stable state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update NodeJS and npm
+    apt: name=nodejs state=latest allow_unauthenticated=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update SBT
+    apt: name=sbt state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update youtube-dl
+    apt: name=youtube-dl state=latest allow_unauthenticated=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update xournal
+    apt: name=xournal state=latest allow_unauthenticated=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Set licence selected for JDK 8
+    shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+  - name: Set licence seen for JDK 8
+    shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+
+  - name: Install/Update JDK 8
+    apt: name=oracle-java8-installer state=latest allow_unauthenticated=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update Steam
+    apt: name=steam-launcher state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update ag
+    apt: name=silversearcher-ag state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install/Update vim
+    apt: name=vim state=latest
+    when: ansible_os_family == "Debian"
+
+    ### Things to install from npm
+    # Requirements for spacemacs javascript layer
+  - name: Install/Update tern
+    npm: name=tern global=yes
+
+  - name: Install/Update js-beautify
+    npm: name=js-beautify global=yes
+
+  - name: Install/Update eslint
+    npm: name=eslint global=yes
+
+    ### Things to checkout from git
+  - name: Check for ~/git
+    stat: path="{{ target_home }}/git"
+    register: git_status
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Create ~/git
+    file: path="{{ target_home }}/git" state=directory
+    become: yes
+    become_user: "{{ target_user }}"
+    when: git_status.stat.exists == False
+
+  - name: Download/Update fonts
+    git:
+      repo: "https://github.com/powerline/fonts.git"
+      dest: "{{ target_home }}/git/fonts"
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Install fonts
+    command: install.sh >
+      chdir="{{ target_home }}/git/fonts"
+      creates="{{ target_home }}/.fonts/Sauce Code Powerline Regular.otf"
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Download/Update dotfiles
+    git:
+      repo: "git@github.com:atextor/dotfiles.git"
+      dest: "{{ target_home }}/git/dotfiles"
+      accept_hostkey: yes
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Install dotfiles
+    file:
+      src: "{{ target_home }}/git/dotfiles/{{ item.path }}"
+      dest: "{{ target_home}}/{{ item.dest }}"
+      state: link
+    become: yes
+    become_user: "{{ target_user }}"
+    with_items:
+      - { path: '.bashrc', dest: '.bashrc' }
+      - { path: '.dir_colors', dest: '.dir_colors' }
+      - { path: '.gitconfig-laptop', dest: '.gitconfig' }
+      - { path: '.lesskey', dest: '.lesskey' }
+      - { path: '.screenrc-laptop', dest: '.screenrc' }
+      - { path: '.spacemacs', dest: '.spacemacs' }
+      - { path: '.urxvt', dest: '.urxvt' }
+      - { path: '.vimrc.bundles.local', dest: '.vimrc.bundles.local' }
+      - { path: '.vimrc.local', dest: '.vimrc.local' }
+      - { path: '.Xmodmap-lab', dest: '.Xmodmap' }
+      - { path: '.Xresources-laptop', dest: '.Xresources' }
+
+  - name: Update .less
+    command: lesskey chdir="{{ target_home }}"
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Update X resources
+    command: "xrdb -merge .Xresources"
+    args:
+      chdir: "{{ target_home }}"
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Check for spf13-vim
+    stat: path="{{ target_home }}/.spf13-vim-3"
+    register: spf13_status
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Install spf13-vim
+    shell: "curl http://j.mp/spf13-vim3 -L -o - | sh"
+    args:
+      chdir="{{ target_home }}"
+    become: yes
+    become_user: "{{ target_user }}"
+    when: spf13_status.stat.exists == False
+
+  - name: Update spf13-vim - pull
+    command: git pull
+    args:
+      chdir: "{{ target_home }}/.spf13-vim-3"
+    become: yes
+    become_user: "{{ target_user }}"
+    when: spf13_status.stat.exists == True
+
+  - name: Update spf13-vim - update vim
+    command: vim +BundleInstall! +BundleClean +qall
+    become: yes
+    become_user: "{{ target_user }}"
+    when: spf13_status.stat.exists == True
+
+  - name: Check for spacemacs
+    stat: path="{{ target_home }}/.emacs.d"
+    register: "spacemacs_status"
+    become: yes
+    become_user: "{{ target_user }}"
+
+  - name: Install spacemacs
+    git:
+      repo: "https://github.com/syl20bnr/spacemacs"
+      dest: "{{ target_home }}/.emacs.d"
+      accept_hostkey: yes
+    become: yes
+    become_user: "{{ target_user }}"
+
+  # Don't automatically update spacemacs here
+
+  - name: Install/update notes repo
+    git:
+      repo: "{{ private_git }}/notes.git"
+      dest: "{{ target_home }}/git/notes"
+      accept_hostkey: yes
+    become: yes
+    become_user: "{{ target_user }}"
