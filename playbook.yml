@@ -35,12 +35,20 @@
     apt_repository: repo='deb http://repo.steampowered.com/steam/ precise steam' state=present
     when: ansible_os_family == "Debian"
 
+  - name: Git APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=A1715D88E1DF1F24
+    when: ansible_os_family == "Debian"
+
   - name: Git APT Repo
     apt_repository: repo='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main' state=present
     when: ansible_os_family == "Debian"
 
   - name: Git src APT Repo
     apt_repository: repo='deb-src http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: youtube-dl APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=531EE72F4C9D234C
     when: ansible_os_family == "Debian"
 
   - name: youtube-dl APT Repo
@@ -51,6 +59,10 @@
     apt_repository: repo='deb-src http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu trusty main' state=present
     when: ansible_os_family == "Debian"
 
+  - name: Kodi APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=C2518248EEA14886
+    when: ansible_os_family == "Debian"
+
   - name: JDK APT Repo
     apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
     when: ansible_os_family == "Debian"
@@ -59,12 +71,20 @@
     apt_repository: repo='deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
     when: ansible_os_family == "Debian"
 
+  - name: Kodi APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=6D975C4791E7EE5E
+    when: ansible_os_family == "Debian"
+
   - name: Kodi APT Repo
     apt_repository: repo='deb http://ppa.launchpad.net/team-xbmc/ppa/ubuntu trusty main' state=present
     when: ansible_os_family == "Debian"
 
   - name: Kodi src APT Repo
     apt_repository: repo='deb-src http://ppa.launchpad.net/team-xbmc/ppa/ubuntu trusty main' state=present
+    when: ansible_os_family == "Debian"
+
+  - name: Node APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=1655A0AB68576280
     when: ansible_os_family == "Debian"
 
   - name: NodeJS APT Repo
