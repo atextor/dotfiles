@@ -95,6 +95,14 @@
     apt_repository: repo='deb-src http://deb.nodesource.com/node_6.x trusty main' state=present
     when: ansible_os_family == "Debian"
 
+  - name: arc theme APT Key
+    apt_key: keyserver=keyserver.ubuntu.com id=5A7D1D38BEB6D886
+    when: ansible_os_family == "Debian"
+
+  - name: arc theme APT Repo
+    apt_repository: repo='deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /' state=present
+    when: ansible_os_family == "Debian"
+
     #### apt-get update
   - name: Update repostitories
     apt: update_cache=yes cache_valid_time=3600
