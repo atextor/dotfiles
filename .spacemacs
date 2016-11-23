@@ -346,6 +346,9 @@ you should place your code here."
   ; SPC b l to list buffers
   (evil-leader/set-key "bl" 'ibuffer)
 
+  ; SPC a t to translate stuff
+  (evil-leader/set-key "at" 'dictcc)
+
   ; C-w is normally bound to evil-window-map
   (define-key evil-normal-state-map (kbd "C-w") 'kill-this-buffer)
   (global-set-key (kbd "C-w") 'kill-this-buffer)
