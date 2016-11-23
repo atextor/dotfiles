@@ -355,6 +355,17 @@ you should place your code here."
 
   (define-key evil-normal-state-map (kbd "<f9>") 'delete-trailing-whitespace)
 
+  ; For magnet-URIs in thesis.ttl
+  (defun open-magnet-url ()
+	"Marks a URL at point and calls the external magnet-handler on it."
+	(interactive)
+	(er/mark-outer-tag)
+    (shell-command-on-region (region-beginning) (region-end) (expand-file-name "~/bin/magnet-handler.sh"))
+	(deactivate-mark))
+
+  ; Bind magnet handler to SPC a m
+  (evil-leader/set-key "am" 'open-magnet-url)
+
   ; LaTeX stuff
   ; Hide latex preview pane from minor modes list
   (diminish 'latex-preview-pane-mode)
@@ -474,8 +485,8 @@ you should place your code here."
 
   ; If this results in "Invalid function: org-babel-header-args-safe-fn",
   ; see https://github.com/syl20bnr/spacemacs/issues/3314
-  (org-babel-do-load-languages 'org-babel-load-languages
-     '((R . t) (sh . t) (shell . t) (emacs-lisp . t) (sparql . t)))
+  ;; (org-babel-do-load-languages 'org-babel-load-languages
+  ;;    '((R . t) (sh . t) (shell . t) (emacs-lisp . t) (sparql . t)))
 
   ; Configure fill column indicator
 ;  (add-hook 'text-mode-hook (lambda ()
