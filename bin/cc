@@ -46,10 +46,25 @@ c|chromium#chromium-browser
 e|emacs#emacs
 f|firefox#firefox
 g|+games#menu games
+h|hex editor#bless
 i|gimp#gimp
+j|jdownloader#/bin/sh "/home/tex/jd2/JDownloader2"
+l|+libreoffice#menu libreoffice
 p|pidgin#pidgin
 s|spacefm#spacefm
+t|thunderbird#thunderbird
 v|vivaldi#vivaldi
+"
+
+title_libreoffice="Alt+SPC a l-"
+menu_libreoffice="
+b|base#libreoffice --base
+c|calc#libreoffice --calc
+d|draw#libreoffice --draw
+i|impress#libreoffice --impress
+l|libreoffice#libreoffice
+m|math#libreoffice --math
+w|writer#libreoffice --writer
 "
 
 title_games="Alt+SPC a g-"
