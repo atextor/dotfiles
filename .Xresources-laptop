@@ -54,7 +54,7 @@ URxvt*internalBorder:     3
 URxvt*transparent:        false
 
 ! rofi
-rofi.key-run:           mod1+space
+rofi.key-run:           mod4+space
 rofi.key-window:        mod4+Tab
 rofi.modi:              window,run
 rofi.terminal:          urxvt
