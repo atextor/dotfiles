@@ -71,7 +71,7 @@ rofi.padding:           5
 rofi.bw:                0
 rofi.separator-style:   solid
 rofi.color-enabled:     true
-rofi.fuzzy:             false
+rofi.fuzzy:             true
 rofi.kb-accept-entry:   Control+l,Return
 rofi.kb-row-down:       Control+j,Down
 rofi.kb-row-up:         Control+k,Up
