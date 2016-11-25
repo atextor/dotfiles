@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Command + control
+# Emulate spacemacs which-key mode using rofi to select window manager functions etc.
+# Bind this script to an easily reachable location, e.g., Alt+Space.
+# The only dependency is rofi - https://github.com/DaveDavenport/rofi.
+
+# Author: Andreas Textor <mail@atextor.de>
+
+# Spawn selection menu.
+# $1 Name of menu. Title will be read from title_${1}, items to display will be read from menu_${1}.
+# Returns the mnemonic of the selected item or "", if menu was closed using ESC.
+function menu() {
+	items="menu_${1}"
+	num_items=$(echo -en "${!items}" | sed -e '/^\s*$/d' | wc -l)
+	urgent_items=$(echo -en "${!items}" | nl | grep '\+' | awk '{ print ($1 - 1)}' | tr '\n' ',' | sed -e 's/,$//g')
+	urgent=
+	[ ! "x$urgent_items" = "x" ] && urgent="-u $urgent_items"
+	title="title_${1}"
+	result=$(echo "${!items}" | \
+		( sed -e 's/#.*$//g' -e '/^\s*$/d' -e 's/|/ → /g'; echo ) | \
+		rofi $urgent -selected-row $num_items -dmenu -p '' -mesg "${!title}" -glob -auto-select -columns 5 | \
+		sed -e 's/ →.*//g')
+	[ $(echo $result | wc -c) -gt 1 ] && $(echo "${!items}" | grep "^${result}" | sed -e 's/.*#//g')
+}
+
+function run_game() {
+	easystroke disable
+	$*
+	easystroke enable
+}
+
+title_root="Alt+SPC- "
+menu_root="
+'|open shell#urxvt
+a|+applications#menu apps
+b|windows#rofi -show window
+r|run menu#rofi -show run
+s|+settings#menu settings
+"
+
+title_settings="Alt+SPC s-"
+menu_settings="
+c|control center#cinnamon-control-center
+s|cinnamon settings#cinnamon-settings
+m|menu editor#cinnamon-menu-editor
+"
+
+title_apps="Alt+SPC a-"
+menu_apps="
+c|chromium#chromium-browser
+e|emacs#emacs
+f|firefox#firefox
+g|+games#menu games
+h|hex editor#bless
+i|gimp#gimp
+j|jdownloader#/bin/sh "/home/tex/jd2/JDownloader2"
+l|+libreoffice#menu libreoffice
+p|pidgin#pidgin
+s|spacefm#spacefm
+t|thunderbird#thunderbird
+v|vivaldi#vivaldi
+"
+
+title_libreoffice="Alt+SPC a l-"
+menu_libreoffice="
+b|base#libreoffice --base
+c|calc#libreoffice --calc
+d|draw#libreoffice --draw
+i|impress#libreoffice --impress
+l|libreoffice#libreoffice
+m|math#libreoffice --math
+w|writer#libreoffice --writer
+"
+
+title_games="Alt+SPC a g-"
+menu_games="
+a|starbound#run_game steam steam://rungameid/211820
+s|steam#steam
+"
+
+menu root
+

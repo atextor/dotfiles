@@ -1,171 +1,90 @@
-! Solarized color scheme for the X Window System
-!
-! http://ethanschoonover.com/solarized
+! Material color scheme
 
+! special
+*.foreground:   #eceff1
+*.background:   #263238
+*.cursorColor:  #eceff1
+! black
+*.color0:       #263238
+*.color8:       #37474f
+! red
+*.color1:       #ff9800
+*.color9:       #ffa74d
+! green
+*.color2:       #8bc34a
+*.color10:      #9ccc65
+! yellow
+*.color3:       #ffc107
+*.color11:      #ffa000
+! blue
+*.color4:       #03a9f4
+*.color12:      #81d4fa
+! magenta
+*.color5:       #e91e63
+*.color13:      #ad1457
+! cyan
+*.color6:       #009688
+*.color14:      #26a69a
+! white
+*.color7:       #cfd8dc
+*.color15:      #eceff1
 
-! Common
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-
-! Dark
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
-
-
-! Light
-! #define S_base03        #fdf6e3
-! #define S_base02        #eee8d5
-! #define S_base01        #93a1a1
-! #define S_base00        #839496
-! #define S_base0         #657b83
-! #define S_base1         #586e75
-! #define S_base2         #073642
-! #define S_base3         #002b36
-
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
-!
+! Urxvt 
 URxvt.intensityStyles:         false
-URxvt*background:              #002b36
-!URxvt*foreground:              #839496
-URxvt*foreground:              #fdf6e3
-URxvt*fadeColor:               #002b36
-URxvt*cursorColor:             #93a1a1
 URxvt*pointerColorBackground:  #586e75
-URxvt*pointerColorForeground:  #93a1a1
-
-URxvt*color0:                  #073642
-URxvt*color1:                  #dc322f
-URxvt*color2:                  #859900
-URxvt*color3:                  #b58900
-URxvt*color4:                  #268bd2
-URxvt*color5:                  #d33682
-URxvt*color6:                  #2aa198
-URxvt*color7:                  #eee8d5
-URxvt*color9:                  #cb4b16
-URxvt*color8:                  #002b36
-URxvt*color10:                 #93a1a1
-URxvt*color11:                 #839496
-URxvt*color12:                 #657b83
-URxvt*color13:                 #6c71c4
-URxvt*color14:                 #586e75
-URxvt*color15:                 #fdf6e3
-
-! Colors
-! ANSI colors are fine, except the dark blue, which is hardly readable.
-!XTerm*color12: #41a7ea
-
-! Xterm/Urxvt
-XTerm*background: black
-XTerm*foreground: lightgrey
-XTerm*faceName:   Source Code Pro for Powerline:pixelsize=14
-!XTerm*saveLines: 1000
-!XTerm*titleBar: False
-!XTerm*loginShell: True
-!XTerm.eightBitOutput: True
-
-! Urxvt
-URxvt.keysym.M-a: perl:mark-yank-urls:activate_mark_mode
-URxvt.underlineURLs: true
-URxvt*perl-lib: /home/tex/.urxvt/
-URxvt.perl-ext: selection,mark-yank-urls
-URxvt*urlLauncher: chromium-browser
+URxvt*pointerColorForeground:  #93a1a1 
+URxvt.keysym.M-a:              perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs:           true
+URxvt*perl-lib:                /home/tex/.urxvt/
+URxvt.perl-ext:                selection,mark-yank-urls
+URxvt*urlLauncher:             chromium-browser
 
 !URxvt*termName:           rxvt-unicode-256color
-URxvt*termName: rxvt-unicode
+URxvt*termName:           rxvt-unicode
 URxvt*geometry:           159x60
 URxvt*loginShell:         true
 URxvt*jumpScroll:         true
 URxvt*scrollstyle:        plain
 URxvt*scrollBar:          false
 URxvt*scrollBar_right:    true
-!URxvt*inheritPixmap:      true
-!URxvt*tintColor:          grey
-!URxvt*shading:            20
-!URxvt*background:         black
-!URxvt*foreground:         lightgrey
-!URxvt*color12:            #41a7ea
-!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11
-!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=11,xft:CODE2000,xft:Symbola
-!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,PowerlineSymbols:pixelsize=12,xft:CODE2000,xft:Symbola
-!URxvt*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15,xft:PowerlineSymbols:pixelsize=12:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
-!URxvt*font:               xft:Source Code Pro:pixelsize=14
-!URxvt*font:               xft:Source Code Pro:pixelsize=13,xft:PowerlineSymbols:pixelsize=11:autohint=false:antialias=false:hinting=false,xft:CODE2000,xft:Symbola
 URxvt*font:               xft:Source Code Pro for Powerline:pixelsize=14,xft:CODE2000,xft:Symbola
 URxvt*title:              terminal
 URxvt*saveLines:          1000
 URxvt*internalBorder:     3
-URxvt*transparent: false
+URxvt*transparent:        false
 
-!URxvt*background:              S_base03
+! rofi
+rofi.key-run:           mod4+space
+rofi.key-window:        mod4+Tab
+rofi.modi:              window,run
+rofi.terminal:          urxvt
+rofi.run-shell-command: {terminal} -e "bash -c {cmd}"
+rofi.sidebar-mode:      false
+rofi.hide-scrollbar:    true
+rofi.lines:             12
+rofi.columns:           1
+rofi.width:             100
+rofi.location:          6
+rofi.yoffset:           -25
+rofi.line-margin:       3
+rofi.padding:           5
+rofi.bw:                0
+rofi.separator-style:   solid
+rofi.color-enabled:     true
+rofi.fuzzy:             true
+rofi.kb-accept-entry:   Control+l,Return
+rofi.kb-row-down:       Control+j,Down
+rofi.kb-row-up:         Control+k,Up
 
-! xcalc
-xcalc*geometry: 200x275
-xcalc.ti.bevel.background: #111111
-xcalc.ti.bevel.screen.background: Black
-xcalc.ti.bevel.screen.DEG.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.RAD.background: Black
-xcalc.ti.bevel.screen.RAD.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.GRAD.background: Black
-xcalc.ti.bevel.screen.GRAD.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.INV.background: Black
-xcalc.ti.bevel.screen.INV.foreground: Red
-xcalc.ti.bevel.screen.LCD.background: Black
-xcalc.ti.bevel.screen.LCD.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.LCD.shadowWidth: 0
-xcalc.ti.bevel.screen.M.background: Black
-xcalc.ti.bevel.screen.M.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.P.background: Black
-xcalc.ti.bevel.screen.P.foreground: Yellow
-xcalc.ti.bevel.screen.DEG.background: Black
-xcalc.ti.background: #333333
-xcalc.ti.Command.foreground: White
-xcalc.ti.Command.background: #777777
-xcalc.ti.button5.background: Orange3
-xcalc.ti.button19.background: #611161
-xcalc.ti.button18.background: #611161
-xcalc.ti.button20.background: #611111
-xcalc.ti.button25.background: #722222
-xcalc.ti.button30.background: #833333
-xcalc.ti.button35.background: #944444
-xcalc.ti.button40.background: #a55555
-xcalc.ti.button22.background: #222262
-xcalc.ti.button23.background: #222262
-xcalc.ti.button24.background: #222272
-xcalc.ti.button27.background: #333373
-xcalc.ti.button28.background: #333373
-xcalc.ti.button29.background: #333373
-xcalc.ti.button32.background: #444484
-xcalc.ti.button33.background: #444484
-xcalc.ti.button34.background: #444484
-xcalc.ti.button37.background: #555595
-xcalc.ti.button38.background: #555595
-xcalc.ti.button39.background: #555595
+!                       bg          border      seperator
+rofi.color-window:      #263238,    #eceff1,    #eceff1
+!                       bg          fg          bgalt       hlbg        hlfg
+rofi.color-normal:      #263238,    #eceff1,    #263238,    #37474f,    #ffc107
+rofi.color-active:      #37474f,    #eceff1,    #37474f,    #37474f,    #ffc107
+rofi.color-urgent:      #263238,    #81d4fa,    #263238,    #37474f,    #ffc107
 
-! xlock
-XLock*font: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso8859-15
-XLock.background: #012C66
-XLock.foreground: #6D8AA2
-XLock.username: Username: 
-XLock.info: Enter password to unlock!
-
-! X Cursors
-Xcursor.size: 25
-
-! Xdvi
-XDvi.background: white
-XDvi:shrinkFactor: 7
+! Xterm/Urxvt
+! XTerm*background: black
+! XTerm*foreground: lightgrey
+! XTerm*faceName:   Source Code Pro for Powerline:pixelsize=14
 
