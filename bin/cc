@@ -60,6 +60,7 @@ p|pidgin#pidgin
 s|spacefm#spacefm
 t|thunderbird#thunderbird
 v|vivaldi#vivaldi
+y|yed#java -jar /opt/java/yed/yed.jar
 "
 
 title_libreoffice="Alt+SPC a l-"
