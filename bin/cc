@@ -24,6 +24,12 @@ function menu() {
 	[ $(echo $result | wc -c) -gt 1 ] && $(echo "${!items}" | grep "^${result}" | sed -e 's/.*#//g')
 }
 
+function run_game() {
+	easystroke disable
+	$*
+	easystroke enable
+}
+
 title_root="Alt+SPC- "
 menu_root="
 '|open shell#urxvt
@@ -69,7 +75,7 @@ w|writer#libreoffice --writer
 
 title_games="Alt+SPC a g-"
 menu_games="
-a|starbound#steam steam://rungameid/211820
+a|starbound#run_game steam steam://rungameid/211820
 s|steam#steam
 "
 
