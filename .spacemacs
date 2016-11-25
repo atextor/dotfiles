@@ -395,6 +395,7 @@ you should place your code here."
    evil-shift-round nil
    evil-escape-key-sequence "qb" ; default is "fd"
    compilation-scroll-output t
+   helm-ag-insert-at-point 'symbol
   )
 
   ; Enable line numbers
