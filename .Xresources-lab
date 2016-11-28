@@ -86,6 +86,6 @@ rofi.color-urgent:      #263238,    #81d4fa,    #263238,    #37474f,    #ffc107
 ! Xterm/Urxvt
 XTerm*background: black
 XTerm*foreground: lightgrey
-XTerm*faceName:   Source Code Pro for Powerline:pixelsize=14
+XTerm*faceName:   Source Code Pro for Powerline:pixelsize=16
 
 
