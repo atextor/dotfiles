@@ -78,6 +78,7 @@ title_games="Alt+SPC a g-"
 menu_games="
 a|starbound#run_game steam steam://rungameid/211820
 s|steam#steam
+w|steam@warg#xpra attach ssh:tex@warg:100
 "
 
 menu root
