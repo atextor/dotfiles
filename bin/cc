@@ -37,6 +37,7 @@ a|+applications#menu apps
 b|windows#rofi -show window
 r|run menu#rofi -show run
 s|+settings#menu settings
+x|xterm#xterm
 "
 
 title_settings="Alt+SPC s-"
