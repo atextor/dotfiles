@@ -358,11 +358,12 @@ you should place your code here."
 
   ; For magnet-URIs in thesis.ttl
   (defun open-magnet-url ()
-	"Marks a URL at point and calls the external magnet-handler on it."
-	(interactive)
-	(er/mark-outer-tag)
+    "Marks a URL at point and calls the external magnet-handler on it."
+    (interactive)
+    (require 'html-mode-expansions)
+    (er/mark-outer-tag)
     (shell-command-on-region (region-beginning) (region-end) (expand-file-name "~/bin/magnet-handler.sh"))
-	(deactivate-mark))
+    (deactivate-mark))
 
   ; Bind magnet handler to SPC a m
   (evil-leader/set-key "am" 'open-magnet-url)
