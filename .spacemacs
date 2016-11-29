@@ -83,6 +83,7 @@ values."
      tabbar-ruler
      ewmctrl
 	 dictcc
+	 magit-svn
    )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -459,6 +460,8 @@ you should place your code here."
                                             (kbd "N") 'ewmctrl-change-window-name
                                             (kbd "R") 'ewmctrl-refresh
                                             (kbd "RET") 'ewmctrl-focus-window)
+  (add-hook 'magit-mode-hook 'magit-svn-mode)
+  (add-hook 'magit-mode-hook (lambda () (evil-define-key 'normal magit-mode-map (kbd "N") 'magit-svn-popup)))
 
   ; Org mode
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
