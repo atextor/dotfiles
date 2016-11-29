@@ -412,6 +412,25 @@ you should place your code here."
   ;; (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   ;; (add-hook 'erc-mode-hook (lambda () (setq-local 'scroll-margin 0)))
 
+  (defun toggle-writeroom ()
+	"Toggles a bunch of settings for a no-distraction experience"
+    (interactive)
+	(spacemacs/toggle-centered-buffer-mode)
+	(spacemacs/toggle-line-numbers)
+	(toggle-frame-fullscreen)
+	(if spacemacs-centered-buffer-mode
+      (progn
+		(spacemacs/toggle-mode-line-off)
+		(spacemacs/scale-up-font)
+		(spacemacs/scale-up-font)
+		(tabbar-mode -1))
+	  (progn
+		(spacemacs/toggle-mode-line-on)
+		(spacemacs/reset-font-size)
+		(tabbar-mode 1))))
+
+  (define-key evil-normal-state-map (kbd "<f12>") 'toggle-writeroom)
+
   ; Set external browser
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
