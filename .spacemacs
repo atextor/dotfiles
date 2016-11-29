@@ -45,8 +45,8 @@ values."
      colors
      git
      (org :variables
-		  org-enable-github-support t
-		  org-enable-bootstrap-support t)
+          org-enable-github-support t
+          org-enable-bootstrap-support t)
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom
@@ -72,7 +72,7 @@ values."
      pdf-tools
      javascript
      ibuffer
-	 ansible
+     ansible
      semweb
      )
    ;; List of additional packages that will be installed without being
@@ -82,8 +82,8 @@ values."
    dotspacemacs-additional-packages '(
      tabbar-ruler
      ewmctrl
-	 dictcc
-	 magit-svn
+     dictcc
+     magit-svn
    )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -413,21 +413,21 @@ you should place your code here."
   ;; (add-hook 'erc-mode-hook (lambda () (setq-local 'scroll-margin 0)))
 
   (defun toggle-writeroom ()
-	"Toggles a bunch of settings for a no-distraction experience"
+    "Toggles a bunch of settings for a no-distraction experience"
     (interactive)
-	(spacemacs/toggle-centered-buffer-mode)
-	(spacemacs/toggle-line-numbers)
-	(toggle-frame-fullscreen)
-	(if spacemacs-centered-buffer-mode
+    (spacemacs/toggle-centered-buffer-mode)
+    (spacemacs/toggle-line-numbers)
+    (toggle-frame-fullscreen)
+    (if spacemacs-centered-buffer-mode
       (progn
-		(spacemacs/toggle-mode-line-off)
-		(spacemacs/scale-up-font)
-		(spacemacs/scale-up-font)
-		(tabbar-mode -1))
-	  (progn
-		(spacemacs/toggle-mode-line-on)
-		(spacemacs/reset-font-size)
-		(tabbar-mode 1))))
+        (spacemacs/toggle-mode-line-off)
+        (spacemacs/scale-up-font)
+        (spacemacs/scale-up-font)
+        (tabbar-mode -1))
+      (progn
+        (spacemacs/toggle-mode-line-on)
+        (spacemacs/reset-font-size)
+        (tabbar-mode 1))))
 
   (define-key evil-normal-state-map (kbd "<f12>") 'toggle-writeroom)
 
@@ -487,12 +487,12 @@ you should place your code here."
 
   ; Eclipse/Eclim installation is host-dependent
   (when (string= system-name "vs06")
-	(setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
+    (setq eclim-eclipse-dirs '("/users/a_textor/software/eclipse-neon")
           eclim-executable "/users/a_textor/software/eclipse-neon/eclim"
           eclimd-default-workspace "/users/a_textor/workspaces/neon-eclim"))
 
   (when (string= system-name "pyrolisk")
-	(setq eclim-eclipse-dirs '("/home/tex/bin/eclipse-neon")
+    (setq eclim-eclipse-dirs '("/home/tex/bin/eclipse-neon")
           eclim-executable "/home/tex/bin/eclipse-neon/eclim"
           eclimd-default-workspace "/home/tex/workspaces/neon-eclim"))
 
