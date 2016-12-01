@@ -447,12 +447,6 @@ you should place your code here."
         engine/browser-function 'browse-url-generic
         browse-url-generic-program "vivaldi")
 
-  ; Add search engines
-  (push '(dictcc
-          :name "dict.cc"
-          :url "http://www.dict.cc/?s=%s")
-         search-engine-alist)
-
   ; Configure powerline
   (setq powerline-default-separator 'arrow-fade)
 
