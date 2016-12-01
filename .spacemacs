@@ -516,18 +516,6 @@ you should place your code here."
   ; see https://github.com/syl20bnr/spacemacs/issues/3314
   ;; (org-babel-do-load-languages 'org-babel-load-languages
   ;;    '((R . t) (sh . t) (shell . t) (emacs-lisp . t) (sparql . t)))
-
-  ; Configure fill column indicator
-;  (add-hook 'text-mode-hook (lambda ()
-;                            (turn-on-auto-fill)
-;                            (fci-mode)
-;                            (set-fill-column 100)))
-;
-;  (add-hook 'LaTeX-mode-hook (lambda ()
-;                              (turn-on-auto-fill)
-;                              (fci-mode)
-;                              (set-fill-column 85)))
-
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
