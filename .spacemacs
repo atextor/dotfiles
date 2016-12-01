@@ -58,11 +58,14 @@ values."
      evil-commentary
      emoji
      html
-     java
+     ;; java
      latex
      markdown
      nginx
-     scala
+	 (scala :variables
+			scala-enable-eldoc t
+			scala-use-unicode-arrows t
+			scala-auto-start-ensime nil)
      shell-scripts
      yaml
      smex
@@ -327,6 +330,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;; Squish warning about MANPATH https://github.com/syl20bnr/spacemacs/issues/3920
     (setq exec-path-from-shell-check-startup-files nil)
+
+	;; http://ensime.github.io/editors/emacs/install/ says to put this here
+	(push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+	(push '(ensime . "melpa-stable") package-pinned-packages)
   )
 
 (defun dotspacemacs/user-config ()
@@ -398,6 +405,8 @@ you should place your code here."
    evil-escape-key-sequence "qb" ; default is "fd"
    compilation-scroll-output t
    helm-ag-insert-at-point 'symbol
+   ensime-startup-snapshot-notification nil
+   flycheck-scalastylerc "/etc/scalastyle_config.xml"
   )
 
   ; Enable line numbers
@@ -411,6 +420,7 @@ you should place your code here."
   (add-hook 'eshell-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   (add-hook 'messages-buffer-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  (add-hook 'sbt-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
   ;; (add-hook 'erc-mode-hook (lambda () (setq-local 'scroll-margin 0)))
 
   (defun toggle-writeroom ()
@@ -482,6 +492,7 @@ you should place your code here."
                                             (kbd "RET") 'ewmctrl-focus-window)
   (add-hook 'magit-mode-hook 'magit-svn-mode)
   (add-hook 'magit-mode-hook (lambda () (evil-define-key 'normal magit-mode-map (kbd "N") 'magit-svn-popup)))
+  (add-hook 'java-mode-hook 'scala-mode)
 
   ; Org mode
   (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE" "CANCELLED")))
