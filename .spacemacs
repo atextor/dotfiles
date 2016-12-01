@@ -65,7 +65,7 @@ values."
 	 (scala :variables
 			scala-enable-eldoc t
 			scala-use-unicode-arrows t
-			scala-auto-start-ensime nil)
+			scala-auto-start-ensime t)
      shell-scripts
      yaml
      smex
