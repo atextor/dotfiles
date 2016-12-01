@@ -408,9 +408,9 @@ you should place your code here."
   (add-hook 'term-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
   (add-hook 'shell-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
   (add-hook 'compilation-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
-  ;; (add-hook 'eshell-mode-hook (lambda () (setq-default 'scroll-margin 0)))
-  ;; (add-hook 'messages-buffer-mode-hook (lambda () (setq-default 'scroll-margin 0)))
-  ;; (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  (add-hook 'eshell-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  (add-hook 'messages-buffer-mode-hook (lambda () (setq-default 'scroll-margin 0)))
+  (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   ;; (add-hook 'erc-mode-hook (lambda () (setq-local 'scroll-margin 0)))
 
   (defun toggle-writeroom ()
