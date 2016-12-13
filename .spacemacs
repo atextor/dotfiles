@@ -416,7 +416,10 @@ you should place your code here."
   (setq scroll-margin 10)
   (add-hook 'term-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
   (add-hook 'shell-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
-  (add-hook 'compilation-mode-hook (lambda () (set (make-local-variable 'scroll-margin) 0)))
+  (add-hook 'compilation-mode-hook (lambda () (progn
+                                                (set (make-local-variable 'scroll-margin) 0)
+                                                (spacemacs/scale-down-font)
+                                                (spacemacs/scale-down-font))))
   (add-hook 'eshell-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   (add-hook 'messages-buffer-mode-hook (lambda () (setq-default 'scroll-margin 0)))
   (add-hook 'inferior-emacs-lisp-mode-hook (lambda () (setq-default 'scroll-margin 0)))
