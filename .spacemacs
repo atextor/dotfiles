@@ -62,10 +62,10 @@ values."
      latex
      markdown
      nginx
-	 (scala :variables
-			scala-enable-eldoc t
-			scala-use-unicode-arrows t
-			scala-auto-start-ensime t)
+     (scala :variables
+            scala-enable-eldoc t
+            scala-use-unicode-arrows t
+            scala-auto-start-ensime t)
      shell-scripts
      yaml
      smex
@@ -331,9 +331,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; Squish warning about MANPATH https://github.com/syl20bnr/spacemacs/issues/3920
     (setq exec-path-from-shell-check-startup-files nil)
 
-	;; http://ensime.github.io/editors/emacs/install/ says to put this here
-	(push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
-	(push '(ensime . "melpa-stable") package-pinned-packages)
+    ;; http://ensime.github.io/editors/emacs/install/ says to put this here
+    (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+    (push '(ensime . "melpa-stable") package-pinned-packages)
   )
 
 (defun dotspacemacs/user-config ()
