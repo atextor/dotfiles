@@ -324,6 +324,7 @@ export PATH="/bin:/usr/bin:/sbin:/usr/sbin"
 [ -d $HOME/.rvm/rubies/default/bin ] && PATH="$HOME/.rvm/rubies/default/bin:$PATH"
 [ -d $HOME/git/rdf.sh ] && PATH="$HOME/git/rdf.sh:$PATH"
 [ -d $HOME/git/rakudobrew/bin ] && PATH="$HOME/git/rakudobrew/bin:$PATH"
+[ -d $HOME/bin/gradle-3.4.1/bin ] && PATH="$HOME/bin/gradle-3.4.1/bin:$PATH"
 export PATH
 
 # Manpath
