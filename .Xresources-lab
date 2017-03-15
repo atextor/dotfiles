@@ -47,7 +47,7 @@ URxvt*jumpScroll:         true
 URxvt*scrollstyle:        plain
 URxvt*scrollBar:          false
 URxvt*scrollBar_right:    true
-URxvt*font:               xft:Source Code Pro for Powerline:pixelsize=16,xft:CODE2000,xft:Symbola
+URxvt*font:               xft:Source Code Pro for Powerline:pixelsize=18,xft:CODE2000,xft:Symbola
 URxvt*title:              terminal
 URxvt*saveLines:          1000
 URxvt*internalBorder:     3
@@ -86,6 +86,6 @@ rofi.color-urgent:      #263238,    #81d4fa,    #263238,    #37474f,    #ffc107
 ! Xterm/Urxvt
 XTerm*background: black
 XTerm*foreground: lightgrey
-XTerm*faceName:   Source Code Pro for Powerline:pixelsize=16
+XTerm*faceName:   Source Code Pro for Powerline:pixelsize=18
 
 
