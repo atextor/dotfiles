@@ -30,9 +30,28 @@ function run_game() {
 	easystroke enable
 }
 
+function run_urxvt() {
+	appdir="$HOME/.local/share/applications"
+	urxvt="$appdir/urxvt.desktop"
+	if [ ! -f "$urxvt" ]; then
+		mkdir -p "$appdir"
+		cat <<-EOF > "$urxvt"
+			[Desktop Entry]
+			Name=URxvt
+			TryExec=urxvt
+			Exec=urxvt
+			Icon=utilities-terminal
+			Categories=Utility;TerminalEmulator;
+			Keywords=Run;
+			Terminal=false
+EOF
+	fi
+	gtk-launch urxvt || urxvt
+}
+
 title_root="Alt+SPC- "
 menu_root="
-'|open shell#urxvt
+'|open shell#run_urxvt
 a|+applications#menu apps
 b|windows#rofi -show window
 r|run menu#rofi -show run
@@ -84,4 +103,3 @@ w|steam@warg#xpra attach ssh:tex@warg:100
 "
 
 menu root
-
