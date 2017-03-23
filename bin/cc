@@ -41,6 +41,7 @@ function run_urxvt() {
 			TryExec=urxvt
 			Exec=urxvt
 			Icon=utilities-terminal
+			Type=Application
 			Categories=Utility;TerminalEmulator;
 			Keywords=Run;
 			Terminal=false
